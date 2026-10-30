@@ -170,9 +170,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 .sw[aria-pressed=true]{color:var(--hd)}
 .sw[aria-pressed=true] .c{box-shadow:0 0 0 2px var(--s2),0 0 0 4px var(--st)}
 @media(max-width:480px){#pv span,#bv span{display:none}#pv,#bv{padding:16px}}
-#bp{position:fixed;inset:0;margin:auto;width:min(940px,calc(100vw - 24px));max-height:88vh;overflow:auto;padding:32px;background:var(--s1);color:var(--txt);border:1px solid var(--line);border-radius:20px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
-#bp::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(3px)}
-#bp h3{font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:6px;padding-right:40px}
+#bp,#cf{position:fixed;inset:0;margin:auto;width:min(940px,calc(100vw - 24px));max-height:88vh;overflow:auto;padding:32px;background:var(--s1);color:var(--txt);border:1px solid var(--line);border-radius:20px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+#bp::backdrop,#cf::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(3px)}
+#bp h3,#cf h3{font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:6px;padding-right:40px}
 #bp h4{font-size:1.15rem;margin:36px 0 16px}
 .bx{position:sticky;top:0;float:right;width:36px;height:36px;margin:-8px -8px 0 0;border:1px solid var(--line);border-radius:50%;background:var(--s2);color:var(--hd);cursor:pointer;z-index:2}
 .bg3{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
@@ -206,6 +206,38 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 .qr{padding:8%;border-radius:12px;background:#fff}
 .qr svg{display:block;width:100%}
 .bq small{display:block;margin-top:2cqw;font-size:max(8px,1.7cqw);color:var(--st)}
+#cf{width:min(480px,calc(100vw - 24px))}
+#cf p{font-size:.9rem;margin-bottom:20px}
+.fld{display:block;margin-bottom:16px;font-size:.8rem;font-weight:600;color:var(--hd)}
+.fld input,.fld textarea{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--hd);font:400 .9rem 'Plus Jakarta Sans',sans-serif}
+.fld textarea{min-height:110px;resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:2px solid var(--st);outline-offset:1px;border-color:var(--st)}
+#cf .btn{width:100%;justify-content:center}
+#cf .btn[disabled]{opacity:.6;cursor:wait}
+#cm{min-height:1.2em;margin-top:14px;font-size:.85rem;text-align:center}
+#cm.ok{color:var(--ok)}
+#cm.er{color:#e5736f}
+.pl{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.pk{position:relative;padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--s2)}
+.pk.hot{border-color:var(--st)}
+.pk h5{font-size:1.05rem;color:var(--hd)}
+.pk .pr{margin-top:10px;font:700 2rem 'Space Grotesk',sans-serif;color:var(--hd)}
+.pk .pr small{font:500 .8rem 'Plus Jakarta Sans',sans-serif;color:var(--mut)}
+.pk .old{margin-top:2px;font-size:.85rem;color:var(--mut)}
+.pk .tag{position:absolute;top:-11px;right:18px;padding:4px 12px;border-radius:99px;background:var(--st);color:var(--bg);font-size:.72rem;font-weight:700}
+.pk ul{display:grid;gap:10px;margin-top:18px}
+.pk li{display:flex;gap:10px;font-size:.85rem}
+.pk li:before{content:"\f00c";font-family:"Font Awesome 6 Free";font-weight:900;color:var(--ok)}
+.pk li.no{color:var(--mut)}
+.pk li.no:before{content:"\f00d";color:var(--mut)}
+html[data-theme=green][data-mode=light]{color-scheme:light;--bg:#f1f6f4;--s1:#fbfdfc;--s2:#e6eeeb;--line:#d3dfdb;--txt:#4a5d58;--hd:#0f1c19;--si:#26372f;--st:#2f6f58;--ok:#2e8f5f;--hov:#9cbcb0;--mut:#7a8f89;--glow:rgba(63,128,104,.14);--bgrgb:241,246,244;--s1rgb:251,253,252;--h1g:linear-gradient(180deg,#0f1c19,#4a5d58);--pb:linear-gradient(135deg,#24342f,#0f1c19);--pbt:#fff;--pbs:rgba(15,28,25,.35);--logo:linear-gradient(135deg,#24342f,#0f1c19);--logot:#fff}
+#md{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+#md small{display:block;margin-bottom:10px;font-size:.72rem;color:var(--mut)}
+.seg{display:flex;gap:6px}
+.seg button{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:none;color:var(--txt);font:500 .8rem 'Plus Jakarta Sans',sans-serif;cursor:pointer}
+.seg button i{margin-right:6px}
+.seg button[aria-pressed=true]{background:var(--hd);border-color:var(--hd);color:var(--bg)}
+.seg button:focus-visible{outline:2px solid var(--st);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -222,6 +254,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 <button class="sw" data-t="white" aria-pressed="false" style="--a:#f7f9f8;--b:#3d7a66"><i class="c"></i>Blanco</button>
 <button class="sw" data-t="pink" aria-pressed="false" style="--a:#1a0d14;--b:#f08fb8"><i class="c"></i>Rosa</button>
 <button class="sw" data-t="violet" aria-pressed="false" style="--a:#110d1c;--b:#a58cf0"><i class="c"></i>Violeta</button>
+</div>
+<div id="md">
+<small>Modo del verde base</small>
+<div class="seg"><button data-m="dark" aria-pressed="true"><i class="fas fa-moon"></i>Oscuro</button><button data-m="light" aria-pressed="false"><i class="fas fa-sun"></i>Claro</button></div>
 </div>
 </div>
 <dialog id="bp" aria-labelledby="bt">
@@ -254,13 +290,55 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 <div class="bq"><div class="qr"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" aria-hidden="true"><path fill="#0b1312" d="M0 0h7v1h-7zM8 0h2v1h-2zM11 0h1v1h-1zM13 0h2v1h-2zM16 0h5v1h-5zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h2v1h-2zM14 1h1v1h-1zM16 1h1v1h-1zM18 1h3v1h-3zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM13 2h1v1h-1zM15 2h3v1h-3zM19 2h2v1h-2zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h2v1h-2zM13 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h3v1h-3zM17 4h1v1h-1zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM11 5h1v1h-1zM13 5h1v1h-1zM18 5h2v1h-2zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM8 7h5v1h-5zM14 7h3v1h-3zM18 7h2v1h-2zM3 8h4v1h-4zM9 8h5v1h-5zM15 8h4v1h-4zM25 8h1v1h-1zM1 9h3v1h-3zM5 9h1v1h-1zM7 9h10v1h-10zM19 9h5v1h-5zM26 9h3v1h-3zM0 10h3v1h-3zM4 10h3v1h-3zM9 10h1v1h-1zM11 10h1v1h-1zM16 10h3v1h-3zM22 10h2v1h-2zM1 11h1v1h-1zM3 11h3v1h-3zM7 11h2v1h-2zM11 11h1v1h-1zM15 11h5v1h-5zM23 11h1v1h-1zM26 11h1v1h-1zM2 12h2v1h-2zM5 12h2v1h-2zM9 12h2v1h-2zM13 12h3v1h-3zM18 12h1v1h-1zM22 12h1v1h-1zM24 12h2v1h-2zM1 13h1v1h-1zM4 13h2v1h-2zM7 13h2v1h-2zM10 13h3v1h-3zM14 13h2v1h-2zM18 13h1v1h-1zM23 13h4v1h-4zM28 13h1v1h-1zM0 14h1v1h-1zM3 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM10 14h2v1h-2zM17 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM0 15h1v1h-1zM4 15h2v1h-2zM7 15h4v1h-4zM14 15h1v1h-1zM17 15h1v1h-1zM20 15h1v1h-1zM22 15h2v1h-2zM26 15h2v1h-2zM0 16h3v1h-3zM4 16h1v1h-1zM6 16h4v1h-4zM12 16h1v1h-1zM16 16h3v1h-3zM20 16h3v1h-3zM25 16h2v1h-2zM1 17h2v1h-2zM4 17h2v1h-2zM10 17h1v1h-1zM12 17h1v1h-1zM14 17h2v1h-2zM18 17h2v1h-2zM21 17h7v1h-7zM0 18h1v1h-1zM2 18h6v1h-6zM10 18h2v1h-2zM13 18h1v1h-1zM15 18h2v1h-2zM18 18h1v1h-1zM22 18h1v1h-1zM26 18h3v1h-3zM0 19h2v1h-2zM3 19h3v1h-3zM10 19h7v1h-7zM20 19h1v1h-1zM22 19h5v1h-5zM28 19h1v1h-1zM1 20h9v1h-9zM16 20h2v1h-2zM19 20h6v1h-6zM27 20h1v1h-1zM12 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h2v1h-2zM0 22h7v1h-7zM8 22h3v1h-3zM16 22h2v1h-2zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM28 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM13 23h1v1h-1zM16 23h3v1h-3zM20 23h1v1h-1zM24 23h1v1h-1zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h2v1h-2zM11 24h1v1h-1zM13 24h3v1h-3zM19 24h6v1h-6zM26 24h3v1h-3zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM9 25h1v1h-1zM12 25h2v1h-2zM16 25h3v1h-3zM20 25h1v1h-1zM22 25h1v1h-1zM25 25h1v1h-1zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM9 26h1v1h-1zM11 26h9v1h-9zM21 26h1v1h-1zM24 26h1v1h-1zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h2v1h-2zM12 27h5v1h-5zM18 27h1v1h-1zM20 27h2v1h-2zM23 27h2v1h-2zM0 28h7v1h-7zM12 28h1v1h-1zM14 28h1v1h-1zM17 28h2v1h-2zM20 28h4v1h-4zM26 28h1v1h-1zM28 28h1v1h-1z"/></svg></div><small>Escaneá para ver mi portafolio</small></div>
 </div></div>
 <div>
-<p>También hacemos tarjetas con tus datos y un QR que abre tu portafolio: lo escanean y ya te tienen en el celular. Se arman en el color que elijas.</p>
+<p>También hacemos tarjetas con tus datos y un QR que abre tu portafolio: lo escanean y tu perfil laboral completo queda en su celular, listo para consultar cuando quieran.</p>
 <small>Probá el color de la tarjeta</small>
 <div class="sws" id="cs"></div>
 <small>El QR de este ejemplo es ilustrativo y no abre ningún sitio.</small>
 </div>
 </div>
-<div class="qa" style="margin-top:32px"><a class="btn p" href="https://taplink.cc/rebelkidfbrii" target="_blank" rel="noopener"><i class="fas fa-paper-plane"></i>Quiero el mío</a></div>
+<h4>Elegí tu plan</h4>
+<div class="pl">
+<div class="pk">
+<h5>Paquete completo</h5>
+<div class="pr">$15.000 <small>ARS</small></div>
+<ul>
+<li>Portafolio virtual como esta preview</li>
+<li>Los 7 colores a elección</li>
+<li>Contacto por WhatsApp y mail</li>
+<li class="no">Sin foto de perfil</li>
+<li class="no">Sin tarjeta de presentación con QR</li>
+</ul>
+</div>
+<div class="pk hot">
+<span class="tag">11% OFF en tu primera compra</span>
+<h5>Paquete completo +</h5>
+<div class="pr">$19.500 <small>ARS</small></div>
+<div class="old"><s>$22.000 ARS</s></div>
+<ul>
+<li>Todo lo del paquete completo</li>
+<li>Foto de perfil a elección</li>
+<li>Tipografía y modo claro u oscuro a elección, además del color</li>
+<li>Tarjeta de presentación con QR personalizado</li>
+</ul>
+</div>
+</div>
+<div class="qa" style="margin-top:32px"><button class="btn p" id="qm"><i class="fas fa-paper-plane"></i>Quiero el mío</button></div>
+</dialog>
+<dialog id="cf" aria-labelledby="ct">
+<button class="bx" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
+<h3 id="ct">Pedí tu portafolio virtual</h3>
+<p>Dejame tus datos y te respondo por mail para coordinar.</p>
+<form id="cform" action="https://api.web3forms.com/submit" method="POST">
+<input type="hidden" name="access_key" value="ac82aca4-22eb-4cb4-b859-e57b8ea9ed86">
+<input type="hidden" name="subject" value="Nuevo contacto desde la preview de portafolios">
+<input type="hidden" name="from_name" value="Preview de portafolios virtuales">
+<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+<label class="fld">Nombre<input type="text" name="name" required autocomplete="name"></label>
+<label class="fld">Email<input type="email" name="email" required autocomplete="email"></label>
+<label class="fld">Mensaje<textarea name="message" required></textarea></label>
+<button class="btn p" type="submit"><i class="fas fa-paper-plane"></i>Enviar mensaje</button>
+<div id="cm" role="status"></div>
+</form>
 </dialog>
 <div id="toast" role="status"><i id="ti" class="fas"></i><span id="tm"></span></div>
 
@@ -486,7 +564,7 @@ document.getElementById('px').onclick=()=>openP(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openP(false)});
 function theme(t,anim){
   if(anim){root.classList.add('tt');setTimeout(()=>root.classList.remove('tt'),400);}
-  root.dataset.theme=t;
+  root.dataset.theme=t;document.getElementById('md').hidden=t!=='green';
   document.querySelectorAll('.sw').forEach(s=>s.setAttribute('aria-pressed',s.dataset.t===t));
   document.querySelector('meta[name=theme-color]').content=getComputedStyle(root).getPropertyValue('--bg').trim();
   try{localStorage.setItem('pv-theme',t)}catch(e){}
@@ -503,6 +581,33 @@ bp.onclick=e=>{const r=bp.getBoundingClientRect();if(e.clientX<r.left||e.clientX
 document.querySelectorAll('#pp .sw').forEach(n=>cs.appendChild(n.cloneNode(true)));
 cs.querySelectorAll('.sw').forEach(b=>b.onclick=()=>theme(b.dataset.t,true));
 theme(root.dataset.theme||'green',false);
+const cf=document.getElementById('cf'),cm=document.getElementById('cm'),cform=document.getElementById('cform');
+document.getElementById('qm').onclick=()=>cf.showModal();
+cf.querySelector('.bx').onclick=()=>cf.close();
+cf.onclick=e=>{const r=cf.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)cf.close()};
+cform.onsubmit=async e=>{
+  e.preventDefault();
+  const b=cform.querySelector('button[type=submit]');
+  b.disabled=true;cm.className='';cm.textContent='Enviando...';
+  try{
+    const r=await fetch(cform.action,{method:'POST',headers:{Accept:'application/json'},body:new FormData(cform)});
+    const j=await r.json();
+    if(!j.success)throw 0;
+    cform.reset();cm.className='ok';cm.textContent='¡Listo! Recibí tu mensaje y te respondo por mail.';
+  }catch(err){cm.className='er';cm.textContent='No se pudo enviar. Probá de nuevo en un momento.'}
+  b.disabled=false;
+};
+const md=document.getElementById('md');
+function mode(m,anim){
+  if(anim){root.classList.add('tt');setTimeout(()=>root.classList.remove('tt'),400);}
+  root.dataset.mode=m;
+  md.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+  document.querySelector('meta[name=theme-color]').content=getComputedStyle(root).getPropertyValue('--bg').trim();
+  try{localStorage.setItem('pv-mode',m)}catch(e){}
+}
+md.querySelectorAll('button').forEach(b=>b.onclick=()=>mode(b.dataset.m,true));
+let sm;try{sm=localStorage.getItem('pv-mode')}catch(e){}
+mode(sm==='light'?'light':'dark',false);
 </script>
 </body>
 </html>
