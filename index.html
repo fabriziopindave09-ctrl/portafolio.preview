@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Playfair+Display:wght@600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b1312;--s1:#101a19;--s2:#152221;--line:#233431;--txt:#a8b9b5;--hd:#f3f6f5;--si:#d0d8d6;--st:#8fbdac;--ok:#7fcfa4;color-scheme:dark;--hov:#35524b;--mut:#70877f;--glow:rgba(143,189,172,.17);--bgrgb:11,19,18;--s1rgb:16,26,25;--h1g:linear-gradient(180deg,#fff,#8d96a5);--pb:linear-gradient(135deg,#eef1f5,#9aa3b2);--pbt:#0b1312;--pbs:rgba(207,213,222,.5);--logo:linear-gradient(135deg,#e8ecf2,#8d96a5);--logot:#0b1312}
 html[data-theme=red]{--bg:#140b0b;--s1:#1c1010;--s2:#241515;--line:#3a2323;--txt:#c2aaaa;--hd:#f8f3f3;--si:#ddd0d0;--st:#e08a8a;--hov:#6b3b3b;--mut:#8f7070;--glow:rgba(224,110,110,.17);--bgrgb:20,11,11;--s1rgb:28,16,16}
@@ -37,7 +37,7 @@ html[data-theme=violet]{--bg:#110d1c;--s1:#181228;--s2:#1f1833;--line:#342a52;--
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--bg);color:var(--txt);font:400 16px/1.65 'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;color:var(--hd);line-height:1.2}
+h1,h2,h3,h4{font-family:var(--fh),sans-serif;color:var(--hd);line-height:1.2}
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
@@ -257,6 +257,27 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 .pk{display:flex;flex-direction:column}
 .pk ul{margin-bottom:22px}
 .pk .btn{width:100%;margin-top:auto;justify-content:center}
+/* tipografías y foto (Paquete completo +) */
+:root{--fh:'Space Grotesk'}
+html[data-font=serif]{--fh:'Playfair Display'}
+html[data-font=wide]{--fh:'Syne'}
+html[data-font=mono]{--fh:'Space Mono'}
+html[data-font]:not([data-font=base]) :is(h1,h2,h3,h4){letter-spacing:normal}
+.avatar{display:flex;align-items:center;justify-content:center;width:132px;height:132px;margin:0 auto 24px;border:2px solid var(--st);border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--s2),var(--s1));font-size:3.2rem;color:var(--st);box-shadow:0 0 0 8px var(--s1),0 20px 50px -20px var(--glow)}
+.avatar[hidden]{display:none}
+#tp,#pf{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+#tp small,#pf small{display:block;font-size:.72rem;color:var(--mut)}
+#pf small{margin-bottom:10px}
+.fts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.ft{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px 8px;border:1px solid var(--line);border-radius:12px;background:none;color:var(--txt);font:500 .68rem 'Plus Jakarta Sans',sans-serif;cursor:pointer}
+.ft b{font-size:1.5rem;font-weight:700;line-height:1.2;color:var(--hd)}
+.ft[aria-pressed=true]{border-color:var(--st);background:var(--s1);color:var(--hd)}
+.ft:focus-visible{outline:2px solid var(--st);outline-offset:2px}
+.ft.lock{cursor:not-allowed}
+.ft.lock b{filter:blur(4px);opacity:.7}
+.ft.lock i{position:absolute;top:15px;left:50%;transform:translateX(-50%);font-size:.85rem;color:var(--hd)}
+#th{transition:color .2s}
+#th.on{color:var(--hd)}
 </style>
 </head>
 <body>
@@ -278,6 +299,24 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 <small>Modo claro u oscuro</small>
 <div class="seg"><button data-m="dark" aria-pressed="true"><i class="fas fa-moon"></i>Oscuro</button><button data-m="light" aria-pressed="false"><i class="fas fa-sun"></i>Claro</button></div>
 <small id="mh" style="margin:10px 0 0"></small>
+</div>
+<div id="tp">
+<small>Tipografía</small>
+<div class="fts">
+<button class="ft" data-f="base" aria-pressed="true"><b style="font-family:'Space Grotesk'">Aa</b><span>Base</span></button>
+<button class="ft" data-f="serif" aria-pressed="false"><b style="font-family:'Playfair Display'">Aa</b><span>Elegante</span></button>
+<button class="ft" data-f="wide" aria-pressed="false"><b style="font-family:'Syne'">Aa</b><span>Creativa</span></button>
+<button class="ft" data-f="mono" aria-pressed="false"><b style="font-family:'Space Mono'">Aa</b><span>Técnica</span></button>
+<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:Georgia,serif">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
+<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:cursive">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
+<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:monospace">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
+<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:fantasy">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
+</div>
+<small id="th">Probá 3 tipografías. Elegir entre todas es del Paquete completo +.</small>
+</div>
+<div id="pf">
+<small>Foto de perfil (Paquete completo +)</small>
+<div class="seg"><button data-p="off" aria-pressed="true"><i class="fas fa-user-slash"></i>Sin foto</button><button data-p="on" aria-pressed="false"><i class="fas fa-camera"></i>Con foto</button></div>
 </div>
 <button class="btn p" id="vp" style="width:100%;margin-top:18px;justify-content:center"><i class="fas fa-tags"></i>Ver planes y precios</button>
 </div>
@@ -387,6 +426,7 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 <main>
 <section id="inicio" class="hero">
 <div class="wrap">
+<div class="avatar" id="av" hidden aria-label="Espacio para foto de perfil"><i class="fas fa-user"></i></div>
 <div class="badge"><span class="dot"></span>Ciudad, País · Disponible para nuevas oportunidades</div>
 <h1>Nombre <span>Apellido</span></h1>
 <div class="roles">
@@ -642,6 +682,12 @@ function goPlans(){document.getElementById('planes').scrollIntoView({behavior:ma
 document.getElementById('goplans').onclick=goPlans;
 document.getElementById('vp').onclick=()=>{openP(false);bp.showModal();setTimeout(goPlans,60)};
 document.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{document.getElementById('plan').value=b.dataset.plan;cf.showModal()});
+function font(f){root.dataset.font=f;document.querySelectorAll('.ft[data-f]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f))}
+document.querySelectorAll('.ft[data-f]').forEach(b=>b.onclick=()=>font(b.dataset.f));
+document.querySelectorAll('.ft.lock').forEach(b=>b.onclick=()=>{const t=document.getElementById('th');t.textContent='Esa tipografía es del Paquete completo +.';t.className='on';setTimeout(()=>{t.className=''},2000)});
+font('base');
+const av=document.getElementById('av');
+document.querySelectorAll('#pf button').forEach(b=>b.onclick=()=>{av.hidden=b.dataset.p!=='on';document.querySelectorAll('#pf button').forEach(x=>x.setAttribute('aria-pressed',x===b))});
 </script>
 </body>
 </html>
