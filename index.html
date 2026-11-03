@@ -216,9 +216,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 #cf{width:min(480px,calc(100vw - 24px))}
 #cf p{font-size:.9rem;margin-bottom:20px}
 .fld{display:block;margin-bottom:16px;font-size:.8rem;font-weight:600;color:var(--hd)}
-.fld input,.fld textarea{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--hd);font:400 .9rem 'Plus Jakarta Sans',sans-serif}
+.fld input,.fld textarea,.fld select{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--hd);font:400 .9rem 'Plus Jakarta Sans',sans-serif}
 .fld textarea{min-height:110px;resize:vertical}
-.fld input:focus,.fld textarea:focus{outline:2px solid var(--st);outline-offset:1px;border-color:var(--st)}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:2px solid var(--st);outline-offset:1px;border-color:var(--st)}
 #cf .btn{width:100%;justify-content:center}
 #cf .btn[disabled]{opacity:.6;cursor:wait}
 #cm{min-height:1.2em;margin-top:14px;font-size:.85rem;text-align:center}
@@ -252,6 +252,11 @@ html[data-theme=black][data-mode=light]{--bg:#f2f2f2;--s1:#fafafa;--s2:#e8e8e8;-
 html[data-theme=pink][data-mode=light]{--bg:#fbf2f6;--s1:#fffcfd;--s2:#f6e4ec;--line:#ead0dc;--txt:#70485c;--hd:#26101b;--si:#43202f;--st:#b83f78;--hov:#dba2bd;--mut:#a07d8e;--glow:rgba(184,63,120,.14);--bgrgb:251,242,246;--s1rgb:255,252,253}
 html[data-theme=violet][data-mode=light]{--bg:#f5f2fb;--s1:#fdfcff;--s2:#ebe5f6;--line:#d9d0ea;--txt:#5a4f75;--hd:#17112b;--si:#30264d;--st:#6b4fc4;--hov:#b3a4dc;--mut:#877d9f;--glow:rgba(107,79,196,.14);--bgrgb:245,242,251;--s1rgb:253,252,255}
 html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b1d;--s2:#1f2326;--line:#2f3539;--txt:#b4bcc0;--hd:#fff;--si:#dfe4e6;--st:#e6ecef;--ok:#7fcfa4;--hov:#596268;--mut:#7b858a;--glow:rgba(255,255,255,.07);--bgrgb:18,20,22;--s1rgb:24,27,29;--h1g:linear-gradient(180deg,#fff,#8d96a5);--pb:linear-gradient(135deg,#eef1f5,#9aa3b2);--pbt:#0b1312;--pbs:rgba(207,213,222,.5);--logo:linear-gradient(135deg,#e8ecf2,#8d96a5);--logot:#0b1312}
+#pp{max-height:calc(100vh - 110px);overflow:auto}
+#planes{scroll-margin-top:16px}
+.pk{display:flex;flex-direction:column}
+.pk ul{margin-bottom:22px}
+.pk .btn{width:100%;margin-top:auto;justify-content:center}
 </style>
 </head>
 <body>
@@ -274,11 +279,13 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 <div class="seg"><button data-m="dark" aria-pressed="true"><i class="fas fa-moon"></i>Oscuro</button><button data-m="light" aria-pressed="false"><i class="fas fa-sun"></i>Claro</button></div>
 <small id="mh" style="margin:10px 0 0"></small>
 </div>
+<button class="btn p" id="vp" style="width:100%;margin-top:18px;justify-content:center"><i class="fas fa-tags"></i>Ver planes y precios</button>
 </div>
 <dialog id="bp" aria-labelledby="bt">
 <button class="bx" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
 <h3 id="bt">¿Por qué un portafolio virtual?</h3>
 <p>Tu perfil profesional siempre disponible, a un link de distancia.</p>
+<button class="btn p" id="goplans" style="margin-top:14px"><i class="fas fa-arrow-down"></i>Ir a los planes</button>
 <h4>Beneficios de tener el tuyo</h4>
 <div class="bg3">
 <div class="bi"><i class="fas fa-clock"></i><h5>Siempre disponible</h5><p>Tu perfil online las 24 horas, para que lo vea quien quiera, cuando quiera.</p></div>
@@ -311,7 +318,7 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 <small>El QR de este ejemplo es ilustrativo y no abre ningún sitio.</small>
 </div>
 </div>
-<h4>Elegí tu plan</h4>
+<h4 id="planes">Elegí tu plan</h4>
 <div class="pl">
 <div class="pk">
 <h5>Paquete completo</h5>
@@ -324,6 +331,7 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 <li class="no">Sin foto de perfil</li>
 <li class="no">Sin tarjeta de presentación con QR</li>
 </ul>
+<button class="btn" data-plan="Paquete completo">Elegir este plan</button>
 </div>
 <div class="pk hot">
 <span class="tag">11% OFF en tu primera compra</span>
@@ -336,6 +344,7 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 <li>Modo claro y oscuro en todos los colores, y tipografía a elección</li>
 <li>Tarjeta de presentación con QR personalizado</li>
 </ul>
+<button class="btn p" data-plan="Paquete completo +">Elegir este plan</button>
 </div>
 </div>
 <div class="qa" style="margin-top:32px"><button class="btn p" id="qm"><i class="fas fa-paper-plane"></i>Quiero el mío</button>
@@ -352,6 +361,7 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 <label class="fld">Nombre<input type="text" name="name" required autocomplete="name"></label>
 <label class="fld">Email<input type="email" name="email" required autocomplete="email"></label>
+<label class="fld">Plan de interés<select name="plan" id="plan"><option value="Quiero consultar">Quiero consultar</option><option value="Paquete completo">Paquete completo ($15.000 ARS)</option><option value="Paquete completo +">Paquete completo + ($19.500 ARS)</option></select></label>
 <label class="fld">Mensaje<textarea name="message" required></textarea></label>
 <button class="btn p" type="submit"><i class="fas fa-paper-plane"></i>Enviar mensaje</button>
 <div id="cm" role="status"></div>
@@ -628,6 +638,10 @@ mode(sm==='light'?'light':'dark',false);
 // WhatsApp: reemplazá por tu número con código de país, sin + ni espacios (Argentina: 549 + código de área + número)
 const WA_NUM='5492914499050';
 document.getElementById('wa').href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent('Hola! Vi la preview de portafolios virtuales y quiero el mío.');
+function goPlans(){document.getElementById('planes').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})}
+document.getElementById('goplans').onclick=goPlans;
+document.getElementById('vp').onclick=()=>{openP(false);bp.showModal();setTimeout(goPlans,60)};
+document.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{document.getElementById('plan').value=b.dataset.plan;cf.showModal()});
 </script>
 </body>
 </html>
