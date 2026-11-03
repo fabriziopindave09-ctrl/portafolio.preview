@@ -245,6 +245,13 @@ html[data-theme=green][data-mode=light]{color-scheme:light;--bg:#f1f6f4;--s1:#fb
 .seg button i{margin-right:6px}
 .seg button[aria-pressed=true]{background:var(--hd);border-color:var(--hd);color:var(--bg)}
 .seg button:focus-visible{outline:2px solid var(--st);outline-offset:2px}
+html[data-mode=light]:not([data-theme=white]){color-scheme:light;--ok:#2e8f5f;--h1g:linear-gradient(180deg,var(--hd),var(--txt));--pb:linear-gradient(135deg,var(--si),var(--hd));--pbt:#fff;--pbs:rgba(0,0,0,.3);--logo:var(--pb);--logot:#fff}
+html[data-theme=red][data-mode=light]{--bg:#faf3f3;--s1:#fffcfc;--s2:#f3e6e6;--line:#e5d0d0;--txt:#6b4b4b;--hd:#1f0f0f;--si:#3a2323;--st:#b04545;--hov:#d1a0a0;--mut:#9a7a7a;--glow:rgba(176,69,69,.14);--bgrgb:250,243,243;--s1rgb:255,252,252}
+html[data-theme=blue][data-mode=light]{--bg:#f1f5fb;--s1:#fbfdff;--s2:#e4ecf7;--line:#cfdcec;--txt:#4a5b73;--hd:#0b1626;--si:#22344f;--st:#2f63b0;--hov:#9db8dc;--mut:#7587a0;--glow:rgba(47,99,176,.14);--bgrgb:241,245,251;--s1rgb:251,253,255}
+html[data-theme=black][data-mode=light]{--bg:#f2f2f2;--s1:#fafafa;--s2:#e8e8e8;--line:#d4d4d4;--txt:#555;--hd:#0a0a0a;--si:#2a2a2a;--st:#3a3a3a;--hov:#a0a0a0;--mut:#888;--glow:rgba(0,0,0,.06);--bgrgb:242,242,242;--s1rgb:250,250,250}
+html[data-theme=pink][data-mode=light]{--bg:#fbf2f6;--s1:#fffcfd;--s2:#f6e4ec;--line:#ead0dc;--txt:#70485c;--hd:#26101b;--si:#43202f;--st:#b83f78;--hov:#dba2bd;--mut:#a07d8e;--glow:rgba(184,63,120,.14);--bgrgb:251,242,246;--s1rgb:255,252,253}
+html[data-theme=violet][data-mode=light]{--bg:#f5f2fb;--s1:#fdfcff;--s2:#ebe5f6;--line:#d9d0ea;--txt:#5a4f75;--hd:#17112b;--si:#30264d;--st:#6b4fc4;--hov:#b3a4dc;--mut:#877d9f;--glow:rgba(107,79,196,.14);--bgrgb:245,242,251;--s1rgb:253,252,255}
+html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b1d;--s2:#1f2326;--line:#2f3539;--txt:#b4bcc0;--hd:#fff;--si:#dfe4e6;--st:#e6ecef;--ok:#7fcfa4;--hov:#596268;--mut:#7b858a;--glow:rgba(255,255,255,.07);--bgrgb:18,20,22;--s1rgb:24,27,29;--h1g:linear-gradient(180deg,#fff,#8d96a5);--pb:linear-gradient(135deg,#eef1f5,#9aa3b2);--pbt:#0b1312;--pbs:rgba(207,213,222,.5);--logo:linear-gradient(135deg,#e8ecf2,#8d96a5);--logot:#0b1312}
 </style>
 </head>
 <body>
@@ -263,8 +270,9 @@ html[data-theme=green][data-mode=light]{color-scheme:light;--bg:#f1f6f4;--s1:#fb
 <button class="sw" data-t="violet" aria-pressed="false" style="--a:#110d1c;--b:#a58cf0"><i class="c"></i>Violeta</button>
 </div>
 <div id="md">
-<small>Modo del verde base</small>
+<small>Modo claro u oscuro</small>
 <div class="seg"><button data-m="dark" aria-pressed="true"><i class="fas fa-moon"></i>Oscuro</button><button data-m="light" aria-pressed="false"><i class="fas fa-sun"></i>Claro</button></div>
+<small id="mh" style="margin:10px 0 0"></small>
 </div>
 </div>
 <dialog id="bp" aria-labelledby="bt">
@@ -311,6 +319,7 @@ html[data-theme=green][data-mode=light]{color-scheme:light;--bg:#f1f6f4;--s1:#fb
 <ul>
 <li>Portafolio virtual como esta preview</li>
 <li>Los 7 colores a elección</li>
+<li>Modo claro y oscuro en el verde</li>
 <li>Contacto por WhatsApp y mail</li>
 <li class="no">Sin foto de perfil</li>
 <li class="no">Sin tarjeta de presentación con QR</li>
@@ -324,7 +333,7 @@ html[data-theme=green][data-mode=light]{color-scheme:light;--bg:#f1f6f4;--s1:#fb
 <ul>
 <li>Todo lo del paquete completo</li>
 <li>Foto de perfil a elección</li>
-<li>Tipografía y modo claro u oscuro a elección, además del color</li>
+<li>Modo claro y oscuro en todos los colores, y tipografía a elección</li>
 <li>Tarjeta de presentación con QR personalizado</li>
 </ul>
 </div>
@@ -572,7 +581,7 @@ document.getElementById('px').onclick=()=>openP(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openP(false)});
 function theme(t,anim){
   if(anim){root.classList.add('tt');setTimeout(()=>root.classList.remove('tt'),400);}
-  root.dataset.theme=t;document.getElementById('md').hidden=t!=='green';
+  root.dataset.theme=t;document.getElementById('mh').textContent=t==='green'?'Claro y oscuro del verde: incluido en el Paquete completo.':'Claro y oscuro de este color: Paquete completo +.';if(t==='white')mode('light');else if(t==='black')mode('dark');
   document.querySelectorAll('.sw').forEach(s=>s.setAttribute('aria-pressed',s.dataset.t===t));
   document.querySelector('meta[name=theme-color]').content=getComputedStyle(root).getPropertyValue('--bg').trim();
   try{localStorage.setItem('pv-theme',t)}catch(e){}
@@ -609,7 +618,7 @@ const md=document.getElementById('md');
 function mode(m,anim){
   if(anim){root.classList.add('tt');setTimeout(()=>root.classList.remove('tt'),400);}
   root.dataset.mode=m;
-  md.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+  document.querySelectorAll('#md button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
   document.querySelector('meta[name=theme-color]').content=getComputedStyle(root).getPropertyValue('--bg').trim();
   try{localStorage.setItem('pv-mode',m)}catch(e){}
 }
