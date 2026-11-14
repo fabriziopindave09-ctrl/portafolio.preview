@@ -260,6 +260,16 @@ html[data-theme=white][data-mode=dark]{color-scheme:dark;--bg:#121416;--s1:#181b
 html[data-font=serif]{--fh:'Playfair Display'}
 html[data-font=wide]{--fh:'Syne'}
 html[data-font=mono]{--fh:'Space Mono'}
+html[data-font=modern]{--fh:'Sora'}
+html[data-font=editorial]{--fh:'DM Serif Display'}
+html[data-font=friendly]{--fh:'Nunito'}
+html[data-font=impact]{--fh:'Bebas Neue'}
+html[data-font=geo]{--fh:'Montserrat'}
+html[data-font=classic]{--fh:'Cormorant Garamond'}
+html[data-font=future]{--fh:'Orbitron'}
+html[data-font=editorial] :is(h1,h2,h3,h4),html[data-font=impact] :is(h1,h2,h3,h4){font-weight:400}
+html[data-font=impact] :is(h1,h2,h3,h4){letter-spacing:.02em!important}
+html[data-font=future] :is(h1,h2,h3,h4){letter-spacing:.01em!important}
 html[data-font]:not([data-font=base]) :is(h1,h2,h3,h4){letter-spacing:normal}
 .avatar{display:flex;align-items:center;justify-content:center;width:132px;height:132px;margin:0 auto 24px;border:2px solid var(--st);border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--s2),var(--s1));font-size:3.2rem;color:var(--st);box-shadow:0 0 0 8px var(--s1),0 20px 50px -20px var(--glow)}
 .avatar[hidden]{display:none}
@@ -271,11 +281,6 @@ html[data-font]:not([data-font=base]) :is(h1,h2,h3,h4){letter-spacing:normal}
 .ft b{font-size:1.5rem;font-weight:700;line-height:1.2;color:var(--hd)}
 .ft[aria-pressed=true]{border-color:var(--st);background:var(--s1);color:var(--hd)}
 .ft:focus-visible{outline:2px solid var(--st);outline-offset:2px}
-.ft.lock{cursor:not-allowed}
-.ft.lock b{filter:blur(4px);opacity:.7}
-.ft.lock i{position:absolute;top:15px;left:50%;transform:translateX(-50%);font-size:.85rem;color:var(--hd)}
-#th{transition:color .2s}
-#th.on{color:var(--hd)}
 
 /* fondos (Paquete completo: 3 · Paquete completo +: 8) */
 .bgx-grid,html[data-bg=grid] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),linear-gradient(var(--line) 1px,transparent 1px) 0 0/var(--g) var(--g),linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/var(--g) var(--g)}
@@ -346,6 +351,7 @@ html[data-bg=aurora] .hero:before,html[data-bg=malla] .hero:before{opacity:.3}
 .pk .nt.ok{color:var(--ok)}
 .pk .nt.wn{color:#d69a3a}
 html[data-mode=light] .pk .nt.wn{color:#a8690f}
+.ft em{position:absolute;top:-6px;right:-4px;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background:var(--st);color:var(--bg);font:700 .7rem/1 'Plus Jakarta Sans',sans-serif;font-style:normal}
 </style>
 </head>
 <body>
@@ -371,16 +377,19 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <div id="tp">
 <small>Tipografía</small>
 <div class="fts">
-<button class="ft" data-f="base" aria-pressed="true"><b style="font-family:'Space Grotesk'">Aa</b><span>Base</span></button>
-<button class="ft" data-f="serif" aria-pressed="false"><b style="font-family:'Playfair Display'">Aa</b><span>Elegante</span></button>
-<button class="ft" data-f="wide" aria-pressed="false"><b style="font-family:'Syne'">Aa</b><span>Creativa</span></button>
-<button class="ft" data-f="mono" aria-pressed="false"><b style="font-family:'Space Mono'">Aa</b><span>Técnica</span></button>
-<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:Georgia,serif">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
-<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:cursive">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
-<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:monospace">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
-<button class="ft lock" aria-disabled="true" title="Paquete completo +"><b style="font-family:fantasy">Aa</b><span>Bloqueada</span><i class="fas fa-lock"></i></button>
+<button class="ft" data-f="base" data-p="0" aria-pressed="true"><b style="font-family:'Space Grotesk',sans-serif">Aa</b><span>Base</span></button>
+<button class="ft" data-f="serif" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Playfair Display',sans-serif">Aa</b><span>Elegante</span></button>
+<button class="ft" data-f="wide" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Syne',sans-serif">Aa</b><span>Creativa</span></button>
+<button class="ft" data-f="mono" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Space Mono',sans-serif">Aa</b><span>Técnica</span></button>
+<button class="ft" data-f="modern" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Sora',sans-serif">Aa</b><span>Moderna</span></button>
+<button class="ft" data-f="editorial" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'DM Serif Display',sans-serif">Aa</b><span>Editorial</span></button>
+<button class="ft" data-f="friendly" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Nunito',sans-serif">Aa</b><span>Amigable</span></button>
+<button class="ft" data-f="impact" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Bebas Neue',sans-serif">Aa</b><span>Impacto</span></button>
+<button class="ft" data-f="geo" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Montserrat',sans-serif">Aa</b><span>Geométrica</span></button>
+<button class="ft" data-f="classic" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Cormorant Garamond',sans-serif">Aa</b><span>Clásica</span></button>
+<button class="ft" data-f="future" data-p="1" aria-pressed="false"><em>+</em><b style="font-family:'Orbitron',sans-serif">Aa</b><span>Futurista</span></button>
 </div>
-<small id="th">Probá 3 tipografías. Elegir entre todas es del Paquete completo +.</small>
+<small id="th"></small>
 </div>
 <div id="bk">
 <small>Fondo</small>
@@ -484,7 +493,7 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <li>Todo lo del paquete completo</li>
 <li>Foto de perfil a elección</li>
 <li>Los 11 fondos a elección</li>
-<li>Modo claro y oscuro en todos los colores, y tipografía a elección</li>
+<li>Modo claro y oscuro en todos los colores y 11 tipografías a elección</li>
 <li>Tarjeta de presentación con QR personalizado</li>
 </ul>
 <p class="nt" id="n2"></p>
@@ -731,7 +740,7 @@ function copy(text,msg){
 }
 function downloadCV(){toast('Acá se descarga tu currículum','fa-file-arrow-down');}
 const root=document.documentElement,pv=document.getElementById('pv'),pp=document.getElementById('pp'),sws=document.querySelectorAll('.sw');
-function openP(o){pp.classList.toggle('open',o);pv.setAttribute('aria-expanded',o)}
+function openP(o){pp.classList.toggle('open',o);pv.setAttribute('aria-expanded',o);if(o)loadFonts()}
 pv.onclick=()=>openP(!pp.classList.contains('open'));
 document.getElementById('px').onclick=()=>openP(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openP(false)});
@@ -788,9 +797,17 @@ function goPlans(){document.getElementById('planes').scrollIntoView({behavior:ma
 document.getElementById('goplans').onclick=goPlans;
 document.getElementById('vp').onclick=()=>{openP(false);bp.showModal();setTimeout(goPlans,60)};
 document.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>openForm(b.dataset.plan));
-function font(f){root.dataset.font=f;document.querySelectorAll('.ft[data-f]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f))}
+const XF='https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Serif+Display&family=Nunito:wght@700;800&family=Bebas+Neue&family=Montserrat:wght@600;700&family=Cormorant+Garamond:wght@600;700&family=Orbitron:wght@600;700&display=swap';
+let xfOk=false;
+function loadFonts(){if(xfOk)return;xfOk=true;const l=document.createElement('link');l.rel='stylesheet';l.href=XF;document.head.appendChild(l)}
+function font(f){
+  if(!['base','serif','wide','mono'].includes(f))loadFonts();
+  root.dataset.font=f;
+  document.querySelectorAll('.ft[data-f]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));
+  const bt=document.querySelector('.ft[data-f="'+f+'"]');
+  document.getElementById('th').textContent=bt.dataset.p==='1'?'Esta tipografía es del Paquete completo +.':'Incluida en el Paquete completo (tipografía base).';
+}
 document.querySelectorAll('.ft[data-f]').forEach(b=>b.onclick=()=>font(b.dataset.f));
-document.querySelectorAll('.ft.lock').forEach(b=>b.onclick=()=>{const t=document.getElementById('th');t.textContent='Esa tipografía es del Paquete completo +.';t.className='on';setTimeout(()=>{t.className=''},2000)});
 font('base');
 const av=document.getElementById('av');
 document.querySelectorAll('#pf button').forEach(b=>b.onclick=()=>{av.hidden=b.dataset.p!=='on';document.querySelectorAll('#pf button').forEach(x=>x.setAttribute('aria-pressed',x===b))});
@@ -871,7 +888,9 @@ function comboInfo(){
 function shareURL(){
   const c=combo(),q=new URLSearchParams();
   q.set('t',c.t);q.set('m',c.m);if(c.f!=='base')q.set('f',c.f);q.set('b',c.b);if(c.p)q.set('p','1');if(LANG==='en')q.set('l','en');
-  return location.href.split(/[?#]/)[0]+'?'+q.toString();
+  const cn=document.querySelector('link[rel=canonical]');
+  const base=/^https?:/.test(location.href)?location.href.split(/[?#]/)[0]:(cn?cn.href:location.href.split(/[?#]/)[0]);
+  return base+'?'+q.toString();
 }
 function renderSummary(){
   const i=comboInfo();
