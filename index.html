@@ -352,6 +352,18 @@ html[data-bg=aurora] .hero:before,html[data-bg=malla] .hero:before{opacity:.3}
 .pk .nt.wn{color:#d69a3a}
 html[data-mode=light] .pk .nt.wn{color:#a8690f}
 .ft em{position:absolute;top:-6px;right:-4px;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background:var(--st);color:var(--bg);font:700 .7rem/1 'Plus Jakarta Sans',sans-serif;font-style:normal}
+
+/* probalo con tu nombre + sorpresa */
+#me{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+#me .mt{display:block;margin-bottom:2px;font:600 .92rem 'Plus Jakarta Sans',sans-serif;color:var(--hd)}
+#me small{display:block;margin-bottom:12px;font-size:.72rem;color:var(--mut)}
+#me .fld{margin-bottom:10px;font-size:.72rem}
+#me .fld input{margin-top:4px;padding:10px 12px;font-size:16px}
+#mgo{display:none;width:100%;margin-top:4px;padding:11px 16px;font-size:.82rem;justify-content:center}
+@media(max-width:700px){#mgo{display:inline-flex}}
+#rn{margin-bottom:18px}
+#rn button{padding:9px 8px;line-height:1.25}
+#rn button i{transition:transform .4s}
 </style>
 </head>
 <body>
@@ -360,6 +372,15 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <button id="px" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
 <h4>Bienvenido/a a la preview de portafolios virtuales</h4>
 <p>Así puede verse tu portafolio. Probá distintos colores y elegí el que más vaya con vos.</p>
+<div id="me">
+<b class="mt">Probalo con tu nombre</b>
+<small>Se ve en vivo en la preview. Si compartís tu combinación o pedís tu portafolio, estos datos viajan en el link y en el mensaje.</small>
+<label class="fld">Tu nombre<input id="mn" type="text" maxlength="40" autocomplete="off" placeholder="Ej: Lucía Fernández"></label>
+<label class="fld">Tu profesión<input id="mr" type="text" maxlength="40" autocomplete="off" placeholder="Ej: Diseñadora gráfica"></label>
+<label class="fld">Tu ciudad<input id="mc" type="text" maxlength="40" autocomplete="off" placeholder="Ej: Rosario, Santa Fe"></label>
+<button class="btn" id="mgo" type="button"><i class="fas fa-eye"></i>Ver cómo queda</button>
+</div>
+<div class="seg" id="rn"><button id="sur" type="button"><i class="fas fa-dice"></i>Sorprendeme</button><button id="rst" type="button"><i class="fas fa-rotate-left"></i>Empezar de nuevo</button></div>
 <div class="sws">
 <button class="sw" data-t="green" aria-pressed="true" title="Verde (base)" style="--a:#0b1312;--b:#8fbdac"><i class="c"></i>Verde</button>
 <button class="sw" data-t="red" aria-pressed="false" style="--a:#140b0b;--b:#e08a8a"><i class="c"></i>Rojo</button>
@@ -447,7 +468,7 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <h4>Tarjetas de presentación con QR personalizado</h4>
 <div class="cr">
 <div class="bcw"><div class="bc">
-<div><h5>Nombre Apellido</h5><p class="r">Profesión principal</p><ul><li>000 000 0000</li><li>nombre.apellido@email.com</li><li>Ciudad, País</li></ul></div>
+<div><h5 id="bcN">Nombre Apellido</h5><p class="r" id="bcR">Profesión principal</p><ul><li>000 000 0000</li><li id="bcE">nombre.apellido@email.com</li><li id="bcC">Ciudad, País</li></ul></div>
 <div class="bq"><div class="qr"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" aria-hidden="true"><path fill="#0b1312" d="M0 0h7v1h-7zM8 0h2v1h-2zM11 0h1v1h-1zM13 0h2v1h-2zM16 0h5v1h-5zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h2v1h-2zM14 1h1v1h-1zM16 1h1v1h-1zM18 1h3v1h-3zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM13 2h1v1h-1zM15 2h3v1h-3zM19 2h2v1h-2zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h2v1h-2zM13 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h3v1h-3zM17 4h1v1h-1zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM11 5h1v1h-1zM13 5h1v1h-1zM18 5h2v1h-2zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM8 7h5v1h-5zM14 7h3v1h-3zM18 7h2v1h-2zM3 8h4v1h-4zM9 8h5v1h-5zM15 8h4v1h-4zM25 8h1v1h-1zM1 9h3v1h-3zM5 9h1v1h-1zM7 9h10v1h-10zM19 9h5v1h-5zM26 9h3v1h-3zM0 10h3v1h-3zM4 10h3v1h-3zM9 10h1v1h-1zM11 10h1v1h-1zM16 10h3v1h-3zM22 10h2v1h-2zM1 11h1v1h-1zM3 11h3v1h-3zM7 11h2v1h-2zM11 11h1v1h-1zM15 11h5v1h-5zM23 11h1v1h-1zM26 11h1v1h-1zM2 12h2v1h-2zM5 12h2v1h-2zM9 12h2v1h-2zM13 12h3v1h-3zM18 12h1v1h-1zM22 12h1v1h-1zM24 12h2v1h-2zM1 13h1v1h-1zM4 13h2v1h-2zM7 13h2v1h-2zM10 13h3v1h-3zM14 13h2v1h-2zM18 13h1v1h-1zM23 13h4v1h-4zM28 13h1v1h-1zM0 14h1v1h-1zM3 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM10 14h2v1h-2zM17 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM0 15h1v1h-1zM4 15h2v1h-2zM7 15h4v1h-4zM14 15h1v1h-1zM17 15h1v1h-1zM20 15h1v1h-1zM22 15h2v1h-2zM26 15h2v1h-2zM0 16h3v1h-3zM4 16h1v1h-1zM6 16h4v1h-4zM12 16h1v1h-1zM16 16h3v1h-3zM20 16h3v1h-3zM25 16h2v1h-2zM1 17h2v1h-2zM4 17h2v1h-2zM10 17h1v1h-1zM12 17h1v1h-1zM14 17h2v1h-2zM18 17h2v1h-2zM21 17h7v1h-7zM0 18h1v1h-1zM2 18h6v1h-6zM10 18h2v1h-2zM13 18h1v1h-1zM15 18h2v1h-2zM18 18h1v1h-1zM22 18h1v1h-1zM26 18h3v1h-3zM0 19h2v1h-2zM3 19h3v1h-3zM10 19h7v1h-7zM20 19h1v1h-1zM22 19h5v1h-5zM28 19h1v1h-1zM1 20h9v1h-9zM16 20h2v1h-2zM19 20h6v1h-6zM27 20h1v1h-1zM12 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h2v1h-2zM0 22h7v1h-7zM8 22h3v1h-3zM16 22h2v1h-2zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM28 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM13 23h1v1h-1zM16 23h3v1h-3zM20 23h1v1h-1zM24 23h1v1h-1zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h2v1h-2zM11 24h1v1h-1zM13 24h3v1h-3zM19 24h6v1h-6zM26 24h3v1h-3zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM9 25h1v1h-1zM12 25h2v1h-2zM16 25h3v1h-3zM20 25h1v1h-1zM22 25h1v1h-1zM25 25h1v1h-1zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM9 26h1v1h-1zM11 26h9v1h-9zM21 26h1v1h-1zM24 26h1v1h-1zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h2v1h-2zM12 27h5v1h-5zM18 27h1v1h-1zM20 27h2v1h-2zM23 27h2v1h-2zM0 28h7v1h-7zM12 28h1v1h-1zM14 28h1v1h-1zM17 28h2v1h-2zM20 28h4v1h-4zM26 28h1v1h-1zM28 28h1v1h-1z"/></svg></div><small>Escaneá para ver mi portafolio</small></div>
 </div></div>
 <div>
@@ -526,7 +547,7 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <header>
 <div class="wrap">
 <div class="bar">
-<a href="#inicio" class="logo"><b>NA</b>NOMBRE APELLIDO</a>
+<a href="#inicio" class="logo"><b id="lgI">NA</b><span id="lgN">NOMBRE APELLIDO</span></a>
 <nav>
 <a href="#inicio">Inicio</a><a href="#sobre-mi">Sobre mí</a><a href="#experiencia">Experiencia</a><a href="#habilidades">Habilidades</a><a href="#formacion">Formación</a><a href="#contacto" class="cta">Contacto</a>
 </nav>
@@ -542,10 +563,10 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <section id="inicio" class="hero">
 <div class="wrap">
 <div class="avatar" id="av" hidden aria-label="Espacio para foto de perfil"><i class="fas fa-user"></i></div>
-<div class="badge"><span class="dot"></span>Ciudad, País · Disponible para nuevas oportunidades</div>
-<h1>Nombre <span>Apellido</span></h1>
+<div class="badge"><span class="dot"></span><span><span id="bdC">Ciudad, País</span> · Disponible para nuevas oportunidades</span></div>
+<h1 id="h1">Nombre <span id="h1b">Apellido</span></h1>
 <div class="roles">
-<span><i class="fas fa-user-tie"></i>Profesión principal</span>
+<span id="rlA"><i class="fas fa-user-tie"></i>Profesión principal</span>
 <span><i class="fas fa-award"></i>Especialidad</span>
 <span><i class="fas fa-handshake"></i>Otro rol o servicio</span>
 </div>
@@ -564,7 +585,7 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <div class="about">
 <div>
 <h3>Un título breve que muestre tu perfil profesional en una sola línea.</h3>
-<p>Soy <strong>Profesión principal</strong> con formación en tu área de estudio y experiencia en tu rubro. Acá va una presentación corta: quién sos, qué hacés y cómo ayudás a quienes trabajan con vos.</p>
+<p>Soy <strong id="abR">Profesión principal</strong> con formación en tu área de estudio y experiencia en tu rubro. Acá va una presentación corta: quién sos, qué hacés y cómo ayudás a quienes trabajan con vos.</p>
 <p>También podés sumar experiencia complementaria, tus fortalezas y el tipo de oportunidades que buscás. Un texto claro, directo y en primera persona.</p>
 <div class="chips">
 <div class="chip"><i class="fas fa-comments"></i>Comunicación</div>
@@ -704,19 +725,19 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <div class="sh"><h2>Hablemos y <span>trabajemos</span></h2><p>¿Tenés un proyecto o una oportunidad en mente? Escribime.</p></div>
 <div class="contact">
 <div class="card ci"><i class="fas fa-phone"></i><div><small>Teléfono / WhatsApp</small><b>000-000-0000</b></div><button onclick="copy('0000000000','Teléfono copiado')" aria-label="Copiar teléfono"><i class="fas fa-copy"></i></button></div>
-<div class="card ci"><i class="fas fa-envelope"></i><div><small>Email</small><b>nombre.apellido@email.com</b></div><button onclick="copy('nombre.apellido@email.com','Email copiado')" aria-label="Copiar email"><i class="fas fa-copy"></i></button></div>
-<div class="card ci"><i class="fas fa-location-dot"></i><div><small>Ubicación</small><b>Ciudad, Provincia</b></div></div>
+<div class="card ci"><i class="fas fa-envelope"></i><div><small>Email</small><b id="ctE">nombre.apellido@email.com</b></div><button id="ctEc" aria-label="Copiar email"><i class="fas fa-copy"></i></button></div>
+<div class="card ci"><i class="fas fa-location-dot"></i><div><small>Ubicación</small><b id="ctC">Ciudad, Provincia</b></div></div>
 <div class="card ci"><i class="fas fa-user-check"></i><div><small>Referencias laborales</small><b>Disponibles a solicitud</b></div></div>
 <div class="qa">
 <a class="btn p" href="#" id="cwa"><i class="fab fa-whatsapp"></i>WhatsApp</a>
-<a class="btn" href="mailto:nombre.apellido@email.com"><i class="fas fa-paper-plane"></i>Enviar mail</a>
+<a class="btn" id="ctM" href="mailto:nombre.apellido@email.com"><i class="fas fa-paper-plane"></i>Enviar mail</a>
 </div>
 </div>
 </div>
 </section>
 </main>
 
-<footer><div class="wrap"><p>© 2026 "@rebelkidfbrii". Todos los derechos reservados.</p><p>Ciudad, País</p></div></footer>
+<footer><div class="wrap"><p>© 2026 "@rebelkidfbrii". Todos los derechos reservados.</p><p id="ftC">Ciudad, País</p></div></footer>
 
 <script>
 const mm=document.getElementById('mm');
@@ -755,7 +776,7 @@ sws.forEach(s=>s.onclick=()=>theme(s.dataset.t,true));
 let sv,seen;
 try{sv=localStorage.getItem('pv-theme');seen=sessionStorage.getItem('pv-seen')}catch(e){}
 if(sv&&document.querySelector('.sw[data-t="'+sv+'"]'))theme(sv,false);
-if(!seen&&!/[?&](t|m|f|b|p)=/.test(location.search)){setTimeout(()=>openP(true),600);try{sessionStorage.setItem('pv-seen','1')}catch(e){}}
+if(!seen&&!/[?&](t|m|f|b|p|n|r|c)=/.test(location.search)){setTimeout(()=>openP(true),600);try{sessionStorage.setItem('pv-seen','1')}catch(e){}}
 const bp=document.getElementById('bp'),cs=document.getElementById('cs');
 document.getElementById('bv').onclick=()=>{openP(false);bp.showModal()};
 bp.querySelector('.bx').onclick=()=>bp.close();
@@ -824,9 +845,87 @@ document.querySelectorAll('.bgb').forEach(b=>b.onclick=()=>bg(b.dataset.b));
 let sb;try{sb=localStorage.getItem('pv-bg')}catch(e){}
 bg(sb&&document.querySelector('.bgb[data-b="'+sb+'"]')?sb:'grid');
 
+// ---- "Probalo con tu nombre": nombre, profesión y ciudad en vivo
+const ME={n:'',r:'',c:''},T0=document.title;
+const mTx=el=>[...el.childNodes].find(n=>n.nodeType===3&&n.nodeValue.trim());
+const g$=id=>document.getElementById(id);
+const mn=g$('mn'),mr=g$('mr'),mc=g$('mc');
+const SMALLW=new Set(['de','del','la','las','los','el','y','e','da','do','dos','das','van','von','di','du','le','al']);
+const mClean=s=>String(s||'').replace(/[\u0000-\u001f\u007f<>]/g,'').replace(/\s+/g,' ').trim().slice(0,40);
+const up1=w=>w.charAt(0).toLocaleUpperCase('es')+w.slice(1);
+const capWords=s=>s.split(' ').map((w,i)=>(i>0&&SMALLW.has(w))?w:(w===w.toLowerCase()?up1(w):w)).join(' ');
+const capFirst=s=>s===s.toLowerCase()?up1(s):s;
+const slug=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const MAIL0='nombre.apellido@email.com';
+const slots=[
+  ['lgI',()=>{const w=ME.n.split(' '),a=[...w[0]],b=[...w[w.length-1]];return(w.length>1?a[0]+b[0]:a.slice(0,2).join('')).toLocaleUpperCase('es')},'n'],
+  ['lgN',()=>ME.n.toLocaleUpperCase('es'),'n'],
+  ['h1',()=>{const w=ME.n.split(' ');return w.length>1?w.slice(0,-1).join(' ')+' ':''},'n',()=>g$('h1').firstChild],
+  ['h1b',()=>{const w=ME.n.split(' ');return w[w.length-1]},'n'],
+  ['bdC',()=>ME.c,'c'],
+  ['rlA',()=>ME.r,'r'],
+  ['abR',()=>ME.r,'r'],
+  ['bcN',()=>ME.n,'n'],
+  ['bcR',()=>ME.r,'r'],
+  ['bcE',()=>meMail()||null,'n'],
+  ['bcC',()=>ME.c,'c'],
+  ['ctE',()=>meMail()||null,'n'],
+  ['ctC',()=>ME.c,'c'],
+  ['ftC',()=>ME.c,'c']
+].map(([id,f,k,nd])=>{const node=nd?nd():mTx(g$(id));return{node,o:node.nodeValue,f,k}});
+function meMail(){
+  const w=ME.n.split(' ').filter(Boolean);if(!w.length)return'';
+  const a=slug(w[0]),b=w.length>1?slug(w[w.length-1]):'';
+  if(!a)return'';return(b?a+'.'+b:a)+'@email.com';
+}
+function trKeep(o){const m=o.match(/^(\s*)([\s\S]*?)(\s*)$/);return m[1]+tr(m[2])+m[3]}
+function applyMe(){
+  slots.forEach(s=>{const v=ME[s.k]?s.f():null;s.node.nodeValue=(v||v==='')&&ME[s.k]?v:trKeep(s.o)});
+  const mail=meMail()||MAIL0;
+  g$('ctM').href='mailto:'+mail;
+  g$('ctEc').onclick=()=>copy(mail,'Email copiado');
+  document.title=(ME.n||ME.r)?[ME.n,ME.r,'Preview'].filter(Boolean).join(' | '):T0;
+}
+function meText(){
+  const b=[];if(ME.n)b.push('nombre '+ME.n);if(ME.r)b.push('profesión '+ME.r);if(ME.c)b.push('ciudad '+ME.c);
+  return b.join(', ');
+}
+function readMe(){ME.n=capWords(mClean(mn.value));ME.r=capFirst(mClean(mr.value));ME.c=capWords(mClean(mc.value))}
+function setMe(o){
+  ME.n=capWords(mClean(o.n));ME.r=capFirst(mClean(o.r));ME.c=capWords(mClean(o.c));
+  mn.value=ME.n;mr.value=ME.r;mc.value=ME.c;
+}
+function saveMe(){try{if(ME.n||ME.r||ME.c)sessionStorage.setItem('pv-me',JSON.stringify(ME));else sessionStorage.removeItem('pv-me')}catch(e){}}
+[mn,mr,mc].forEach(i=>{
+  i.oninput=()=>{readMe();applyMe();saveMe();renderSummary()};
+  i.onkeydown=e=>{if(e.key==='Enter'&&matchMedia('(max-width:700px)').matches){e.preventDefault();g$('mgo').click()}};
+});
+g$('mgo').onclick=()=>{openP(false);window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
+try{const s=JSON.parse(sessionStorage.getItem('pv-me')||'null');if(s)setMe(s)}catch(e){}
+
+// ---- Sorprendeme / Empezar de nuevo
+function setPhoto(on){av.hidden=!on;document.querySelectorAll('#pf button').forEach(x=>x.setAttribute('aria-pressed',(x.dataset.p==='on')===on))}
+function rndOther(list,cur){const o=list.filter(x=>x!==cur);return o[Math.floor(Math.random()*o.length)]}
+let diceRot=0;
+g$('sur').onclick=()=>{
+  const T=[...document.querySelectorAll('#pp .sw')].map(x=>x.dataset.t);
+  const F=[...document.querySelectorAll('.ft[data-f]')].map(x=>x.dataset.f);
+  const B=[...document.querySelectorAll('.bgb')].map(x=>x.dataset.b);
+  theme(rndOther(T,root.dataset.theme),true);
+  font(rndOther(F,root.dataset.font||'base'));
+  bg(rndOther(B,root.dataset.bg));
+  diceRot+=180;g$('sur').querySelector('i').style.transform='rotate('+diceRot+'deg)';
+};
+g$('rst').onclick=()=>{
+  theme('green',true);mode('dark',true);font('base');bg('grid');setPhoto(false);
+  setMe({n:'',r:'',c:''});applyMe();saveMe();renderSummary();
+  try{history.replaceState(null,'',location.pathname)}catch(e){}
+};
+
 // ---- idioma del portafolio (ES / EN)
 let LANG='es';
 const EN=new Map(Object.entries({"NOMBRE APELLIDO": "FIRST LAST", "Inicio": "Home", "Sobre mí": "About me", "Experiencia": "Experience", "Habilidades": "Skills", "Formación": "Education", "Contacto": "Contact", "Ciudad, País · Disponible para nuevas oportunidades": "City, Country · Open to new opportunities", "Nombre": "First", "Apellido": "Last", "Profesión principal": "Main profession", "Especialidad": "Specialty", "Otro rol o servicio": "Another role or service", "Una frase breve que resume tu propuesta de valor y tu forma de trabajar.": "A short sentence that sums up your value and how you work.", "Ver experiencia": "View experience", "Contactarme": "Contact me", "Descargar CV": "Download CV", "Sobre": "About", "mí": "me", "Un título breve que muestre tu perfil profesional en una sola línea.": "A short headline that shows your professional profile in one line.", "Soy": "I am a", "con formación en tu área de estudio y experiencia en tu rubro. Acá va una presentación corta: quién sos, qué hacés y cómo ayudás a quienes trabajan con vos.": "with training in your field of study and experience in your industry. A short introduction goes here: who you are, what you do and how you help the people you work with.", "También podés sumar experiencia complementaria, tus fortalezas y el tipo de oportunidades que buscás. Un texto claro, directo y en primera persona.": "You can also add complementary experience, your strengths and the kind of opportunities you are looking for. A clear, direct text in the first person.", "Comunicación": "Communication", "Responsabilidad": "Responsibility", "Trabajo en equipo": "Teamwork", "Adaptabilidad": "Adaptability", "Certificación destacada": "Key certification", "Licencia de conducir": "Driver's license", "Valor agregado": "Added value", "Tu fortaleza principal:": "Your main strength:", "describí en una o dos líneas qué te distingue del resto.": "describe in one or two lines what sets you apart.", "Tu diferencial:": "Your edge:", "una experiencia, método o enfoque propio que aporte valor.": "an experience, method or approach of your own that adds value.", "Versatilidad y movilidad:": "Versatility and mobility:", "habilidades complementarias y disponibilidad.": "complementary skills and availability.", "Trayectoria": "Work", "laboral": "experience", "Recorrido profesional por tus áreas de trabajo.": "Your professional path across your areas of work.", "Todos": "All", "Área principal": "Main area", "Área secundaria": "Secondary area", "Complementaria": "Complementary", "Mes Año – Actualidad": "Month Year – Present", "Institución o empresa 1": "Institution or company 1", "Cargo actual": "Current position", "Breve descripción del puesto y de tus responsabilidades principales.": "Short description of the role and your main responsibilities.", "Tarea o logro destacado.": "Key task or achievement.", "Mes Año – Mes Año": "Month Year – Month Year", "Institución o empresa 2": "Institution or company 2", "Cargo o función": "Position or role", "Descripción del trabajo realizado y del rol que cumpliste en el equipo.": "Description of the work done and the role you played in the team.", "Resultado o aporte concreto.": "Concrete result or contribution.", "Otra tarea o logro relevante.": "Another relevant task or achievement.", "Año": "Year", "Institución o empresa 3": "Institution or company 3", "Descripción breve de la experiencia y de las tareas desempeñadas.": "Short description of the experience and the tasks performed.", "Año – Año": "Year – Year", "Proyecto o trabajo independiente": "Project or freelance work", "Rol desempeñado": "Role performed", "Contá de qué trató el proyecto y cuál fue tu participación.": "Tell what the project was about and what your part was.", "Mes Año": "Month Year", "Institución o empresa 4": "Institution or company 4", "Descripción breve de las tareas realizadas.": "Short description of the tasks performed.", "Experiencia previa": "Previous experience", "Institución o empresa 5": "Institution or company 5", "Experiencia complementaria": "Complementary experience", "Experiencia complementaria 1": "Complementary experience 1", "Área o rubro": "Area or industry", "Tareas que te dieron versatilidad y capacidad de trabajo en equipo.": "Tasks that gave you versatility and teamwork skills.", "Tarea o responsabilidad 1.": "Task or responsibility 1.", "Tarea o responsabilidad 2.": "Task or responsibility 2.", "Tarea o responsabilidad 3.": "Task or responsibility 3.", "Oficios y otros trabajos": "Trades and other jobs", "Experiencia complementaria 2": "Complementary experience 2", "Oficios o trabajos que te dieron adaptación y autonomía.": "Trades or jobs that gave you adaptability and autonomy.", "Habilidades &": "Skills &", "competencias": "competencies", "Lo que sabés hacer y cómo lo aplicás en cada trabajo.": "What you can do and how you apply it in each job.", "Competencias principales": "Core competencies", "Las habilidades centrales de tu profesión.": "The central skills of your profession.", "Habilidad principal 1": "Core skill 1", "Habilidad principal 2": "Core skill 2", "Habilidad principal 3": "Core skill 3", "Resolución de problemas": "Problem solving", "Complementarias": "Complementary", "Versatilidad para distintos entornos de trabajo.": "Versatility for different work environments.", "Atención al público": "Customer service", "Herramienta o software": "Tool or software", "Idioma": "Language", "Organización": "Organization", "Habilidad técnica 1": "Technical skill 1", "Habilidad técnica 2": "Technical skill 2", "Diseño gráfico": "Graphic design", "Formación &": "Education &", "certificaciones": "certifications", "Formación académica": "Academic education", "Título universitario o terciario": "University or vocational degree", "Universidad o institución": "University or institution", "Estudios secundarios": "Secondary education", "Nombre de la institución": "Name of the institution", "Completo": "Completed", "Estudios primarios": "Primary education", "Certificación o carnet": "Certification or card", "Vigente": "Valid", "Categoría": "Category", "Cursos y capacitaciones": "Courses and training", "Curso o capacitación 1": "Course or training 1", "Curso o capacitación 2": "Course or training 2", "Curso o capacitación 3": "Course or training 3", "Curso o capacitación 4": "Course or training 4", "Curso o capacitación 5": "Course or training 5", "Institución": "Institution", "Institución · Año": "Institution · Year", "Taller o seminario": "Workshop or seminar", "Hablemos y": "Let's talk and", "trabajemos": "work together", "¿Tenés un proyecto o una oportunidad en mente? Escribime.": "Got a project or an opportunity in mind? Write to me.", "Teléfono / WhatsApp": "Phone / WhatsApp", "Email": "Email", "Ubicación": "Location", "Ciudad, Provincia": "City, State", "Referencias laborales": "Work references", "Disponibles a solicitud": "Available on request", "WhatsApp": "WhatsApp", "Enviar mail": "Send email", "© 2026 \"@rebelkidfbrii\". Todos los derechos reservados.": "© 2026 \"@rebelkidfbrii\". All rights reserved.", "Ciudad, País": "City, Country", "Abrir menú": "Open menu", "Copiar teléfono": "Copy phone", "Copiar email": "Copy email", "Espacio para foto de perfil": "Profile photo space", "Acá se descarga tu currículum": "Your résumé downloads here", "Teléfono copiado": "Phone copied", "Email copiado": "Email copied", "Acá se abre WhatsApp con tu número y un mensaje ya escrito": "WhatsApp opens here with your number and a ready-made message"}));
+EN.set('Ciudad, País','City, Country');EN.set('· Disponible para nuevas oportunidades','· Open to new opportunities');EN.set('Nombre Apellido','First Last');
 function tr(s){return LANG==='en'&&EN.has(s)?EN.get(s):s}
 const origTx=new Map(),origAt=new Map();
 function setLang(l){
@@ -845,6 +944,7 @@ function setLang(l){
     });
   });
   document.querySelectorAll('#lg span[data-l]').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
+  applyMe();
   try{localStorage.setItem('pv-lang',l)}catch(e){}
 }
 document.getElementById('lg').onclick=()=>setLang(LANG==='es'?'en':'es');
@@ -883,11 +983,11 @@ function comboInfo(){
   if(c.p)plus.push('foto de perfil');
   const def=c.t==='green'&&c.m==='dark'&&c.f==='base'&&c.b==='grid'&&!c.p;
   const text='color '+col+' (modo '+modeN.toLowerCase()+'), fondo '+bgn+', tipografía '+ft.toLowerCase()+', '+(c.p?'con':'sin')+' foto de perfil';
-  return{c,chips,plus,def,text};
+  return{c,chips,plus,def,text,me:meText()};
 }
 function shareURL(){
   const c=combo(),q=new URLSearchParams();
-  q.set('t',c.t);q.set('m',c.m);if(c.f!=='base')q.set('f',c.f);q.set('b',c.b);if(c.p)q.set('p','1');if(LANG==='en')q.set('l','en');
+  q.set('t',c.t);q.set('m',c.m);if(c.f!=='base')q.set('f',c.f);q.set('b',c.b);if(c.p)q.set('p','1');if(ME.n)q.set('n',ME.n);if(ME.r)q.set('r',ME.r);if(ME.c)q.set('c',ME.c);if(LANG==='en')q.set('l','en');
   const cn=document.querySelector('link[rel=canonical]');
   const base=/^https?:/.test(location.href)?location.href.split(/[?#]/)[0]:(cn?cn.href:location.href.split(/[?#]/)[0]);
   return base+'?'+q.toString();
@@ -903,7 +1003,8 @@ function renderSummary(){
   else{n1.className='nt ok';n1.textContent='Incluye tu combinación actual.'}
   n2.className='nt ok';n2.textContent='Incluye todo lo que elegiste.';
   pk[0].classList.toggle('rec',!need&&!i.def);pk[1].classList.toggle('rec',need);
-  const msg='Hola! Vi la preview de portafolios virtuales y quiero el mío.'+(i.def?'':' Mi combinación: '+i.text+'. '+shareURL());
+  const bits=[];if(!i.def)bits.push('Mi combinación: '+i.text+'.');if(i.me)bits.push('Mis datos: '+i.me+'.');
+  const msg='Hola! Vi la preview de portafolios virtuales y quiero el mío.'+(bits.length?' '+bits.join(' ')+' '+shareURL():'');
   document.getElementById('wa').href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg);
 }
 const moS=new MutationObserver(renderSummary);
@@ -913,9 +1014,10 @@ let lastAuto='';
 function openForm(plan){
   const i=comboInfo(),m=cform.elements.message,sel=document.getElementById('plan');
   if(plan)sel.value=plan;else if(!i.def)sel.value=i.plus.length?'Paquete completo +':'Paquete completo';
-  const auto=i.def?'':'Hola! Esta es mi combinación de la preview: '+i.text+'.';
+  const ab=[];if(!i.def)ab.push('Esta es mi combinación de la preview: '+i.text+'.');if(i.me)ab.push('Mis datos: '+i.me+'.');
+  const auto=ab.length?'Hola! '+ab.join(' '):'';
   if(m.value.trim()===''||m.value===lastAuto){m.value=auto;lastAuto=auto}
-  document.getElementById('cl').value=i.def?'':shareURL();
+  document.getElementById('cl').value=(i.def&&!i.me)?'':shareURL();
   cf.showModal();
 }
 async function shareCombo(){
@@ -927,7 +1029,7 @@ async function shareCombo(){
   copy(u,'Link de tu combinación copiado');
 }
 document.getElementById('sh').onclick=shareCombo;
-// ---- cargar la combinación desde el link (?t=…&m=…&f=…&b=…&p=1&l=en)
+// ---- cargar la combinación desde el link (?t=…&m=…&f=…&b=…&p=1&n=…&r=…&c=…&l=en)
 (function(){
   let q;try{q=new URLSearchParams(location.search)}catch(e){return}
   const has=(sel,a,v)=>v&&[...document.querySelectorAll(sel)].some(x=>x.dataset[a]===v);
@@ -937,9 +1039,12 @@ document.getElementById('sh').onclick=shareCombo;
   if(has('.ft[data-f]','f',f)){font(f);any=true}
   if(has('.bgb','b',b)){bg(b);any=true}
   if(q.get('p')==='1'){av.hidden=false;document.querySelectorAll('#pf button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.p==='on'));any=true}
+  const ln=q.get('n'),lr=q.get('r'),lc=q.get('c');
+  if(ln||lr||lc){setMe({n:ln,r:lr,c:lc});applyMe();saveMe();any=true}
   if(q.get('l')==='en')setLang('en');
   if(any)setTimeout(()=>toast('Cargamos la combinación del link','fa-link'),900);
 })();
+applyMe();
 renderSummary();
 </script>
 </body>
