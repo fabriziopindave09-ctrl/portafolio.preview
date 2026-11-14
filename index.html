@@ -2,6 +2,7 @@
 <html lang="es" data-bg="grid">
 <head>
 <meta charset="UTF-8">
+<script>if(window.name==="pv-embed")document.documentElement.classList.add("emb")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portafolios virtuales profesionales | Preview</title>
 <meta name="description" content="Tu currículum en un solo link: portafolio virtual moderno con 7 colores, contacto directo y tarjeta de presentación con QR. Mirá la preview.">
@@ -361,9 +362,34 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 #me .fld input{margin-top:4px;padding:10px 12px;font-size:16px}
 #mgo{display:none;width:100%;margin-top:4px;padding:11px 16px;font-size:.82rem;justify-content:center}
 @media(max-width:700px){#mgo{display:inline-flex}}
-#rn{margin-bottom:18px}
+#rn{margin-bottom:10px}
 #rn button{padding:9px 8px;line-height:1.25}
 #rn button i{transition:transform .4s}
+
+/* vista de celular */
+#vm{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;padding:10px 12px;border:1px solid var(--line);border-radius:12px}
+#vm[hidden]{display:none}
+#vm b{display:block;font-size:.82rem;font-weight:600;color:var(--hd)}
+#vm small{display:block;font-size:.72rem;color:var(--mut)}
+#vmb{position:relative;flex:none;width:44px;height:26px;border:1px solid var(--line);border-radius:99px;background:var(--bg);cursor:pointer;transition:background-color .2s,border-color .2s}
+#vmb:after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--mut);transition:transform .2s,background-color .2s}
+#vmb[aria-checked=true]{background:var(--st);border-color:var(--st)}
+#vmb[aria-checked=true]:after{transform:translateX(18px);background:var(--bg)}
+#vmb:focus-visible,#phx:focus-visible{outline:2px solid var(--st);outline-offset:3px}
+#ph{position:fixed;inset:0;z-index:45;display:grid;place-items:center;overflow:hidden;overscroll-behavior:contain;background:rgba(var(--bgrgb),.9);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#ph[hidden]{display:none}
+#pp.open~#ph{right:380px}
+#pw{position:relative;flex:none;width:414px;height:788px;padding:12px;border-radius:58px;background:#0b0b0c;box-shadow:0 0 0 2px #2b2b2e,0 40px 70px -24px rgba(0,0,0,.75);transform:scale(var(--ps,1))}
+#pw:before{content:"";position:absolute;left:-4px;top:150px;width:4px;height:64px;border-radius:3px 0 0 3px;background:#2b2b2e}
+#pw:after{content:"";position:absolute;right:-4px;top:190px;width:4px;height:92px;border-radius:0 3px 3px 0;background:#2b2b2e}
+#ps{display:flex;flex-direction:column;width:390px;height:764px;border-radius:46px;overflow:hidden;background:var(--bg)}
+#sb{position:relative;flex:none;display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 30px 0 34px;font:600 .8rem 'Plus Jakarta Sans',sans-serif;color:var(--hd)}
+#sb:before{content:"";position:absolute;left:50%;top:10px;width:96px;height:26px;margin-left:-48px;border-radius:99px;background:#000}
+#sb span{display:flex;gap:6px;font-size:.78rem}
+#ps iframe{display:block;flex:none;width:390px;height:720px;border:0;background:var(--bg)}
+#phx{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--line);border-radius:99px;background:var(--s2);color:var(--hd);font:500 .8rem 'Plus Jakarta Sans',sans-serif;cursor:pointer;white-space:nowrap}
+@media(max-width:700px){#ph,#vm{display:none!important}}
+html.emb #fabs,html.emb #pp,html.emb #ph,html.emb #toast{display:none!important}
 </style>
 </head>
 <body>
@@ -381,6 +407,7 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <button class="btn" id="mgo" type="button"><i class="fas fa-eye"></i>Ver cómo queda</button>
 </div>
 <div class="seg" id="rn"><button id="sur" type="button"><i class="fas fa-dice"></i>Sorprendeme</button><button id="rst" type="button"><i class="fas fa-rotate-left"></i>Empezar de nuevo</button></div>
+<div id="vm"><div><b id="vml">Vista de celular</b><small>Mirá la portada como la verán tus contactos.</small></div><button id="vmb" type="button" role="switch" aria-checked="false" aria-labelledby="vml"></button></div>
 <div class="sws">
 <button class="sw" data-t="green" aria-pressed="true" title="Verde (base)" style="--a:#0b1312;--b:#8fbdac"><i class="c"></i>Verde</button>
 <button class="sw" data-t="red" aria-pressed="false" style="--a:#140b0b;--b:#e08a8a"><i class="c"></i>Rojo</button>
@@ -440,6 +467,10 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <button class="btn" id="sh" style="width:100%;margin-top:12px;justify-content:center"><i class="fas fa-share-nodes"></i>Compartir mi combinación</button>
 </div>
 <button class="btn p" id="vp" style="width:100%;margin-top:18px;justify-content:center"><i class="fas fa-tags"></i>Ver planes y precios</button>
+</div>
+<div id="ph" hidden>
+<div id="pw"><div id="ps"><div id="sb"><b>9:41</b><span><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div></div></div>
+<button id="phx" type="button"><i class="fas fa-xmark"></i>Salir de la vista de celular</button>
 </div>
 <dialog id="bp" aria-labelledby="bt">
 <button class="bx" aria-label="Cerrar"><i class="fas fa-xmark"></i></button>
@@ -740,6 +771,7 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 <footer><div class="wrap"><p>© 2026 "@rebelkidfbrii". Todos los derechos reservados.</p><p id="ftC">Ciudad, País</p></div></footer>
 
 <script>
+const EMB=window.name==='pv-embed';
 const mm=document.getElementById('mm');
 document.getElementById('mb').onclick=()=>mm.classList.toggle('open');
 mm.querySelectorAll('a').forEach(a=>a.onclick=()=>mm.classList.remove('open'));
@@ -776,7 +808,7 @@ sws.forEach(s=>s.onclick=()=>theme(s.dataset.t,true));
 let sv,seen;
 try{sv=localStorage.getItem('pv-theme');seen=sessionStorage.getItem('pv-seen')}catch(e){}
 if(sv&&document.querySelector('.sw[data-t="'+sv+'"]'))theme(sv,false);
-if(!seen&&!/[?&](t|m|f|b|p|n|r|c)=/.test(location.search)){setTimeout(()=>openP(true),600);try{sessionStorage.setItem('pv-seen','1')}catch(e){}}
+if(!seen&&!EMB&&!/[?&](t|m|f|b|p|n|r|c)=/.test(location.search)){setTimeout(()=>openP(true),600);try{sessionStorage.setItem('pv-seen','1')}catch(e){}}
 const bp=document.getElementById('bp'),cs=document.getElementById('cs');
 document.getElementById('bv').onclick=()=>{openP(false);bp.showModal()};
 bp.querySelector('.bx').onclick=()=>bp.close();
@@ -945,7 +977,8 @@ function setLang(l){
   });
   document.querySelectorAll('#lg span[data-l]').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
   applyMe();
-  try{localStorage.setItem('pv-lang',l)}catch(e){}
+  if(!EMB)try{localStorage.setItem('pv-lang',l)}catch(e){}
+  try{renderSummary()}catch(e){}
 }
 document.getElementById('lg').onclick=()=>setLang(LANG==='es'?'en':'es');
 let sl;try{sl=localStorage.getItem('pv-lang')}catch(e){}
@@ -1006,6 +1039,7 @@ function renderSummary(){
   const bits=[];if(!i.def)bits.push('Mi combinación: '+i.text+'.');if(i.me)bits.push('Mis datos: '+i.me+'.');
   const msg='Hola! Vi la preview de portafolios virtuales y quiero el mío.'+(bits.length?' '+bits.join(' ')+' '+shareURL():'');
   document.getElementById('wa').href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg);
+  syncPhone();
 }
 const moS=new MutationObserver(renderSummary);
 moS.observe(root,{attributes:true,attributeFilter:['data-theme','data-mode','data-font','data-bg']});
@@ -1044,8 +1078,107 @@ document.getElementById('sh').onclick=shareCombo;
   if(q.get('l')==='en')setLang('en');
   if(any)setTimeout(()=>toast('Cargamos la combinación del link','fa-link'),900);
 })();
+
+// ---- estadísticas simples y sin cookies (GoatCounter)
+// Pegá acá tu código de GoatCounter (el de https://CODIGO.goatcounter.com). Vacío = no se mide nada.
+const GC_CODE='rebelkidfbrii';
+function track(path,title,ev){
+  if(!GC_CODE||EMB||navigator.doNotTrack==='1'||!/^https?:$/.test(location.protocol)||/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname))return;
+  try{
+    const q=new URLSearchParams({p:path,t:title||path});
+    if(ev)q.set('e','1');
+    else if(document.referrer&&document.referrer.indexOf(location.origin)!==0)q.set('r',document.referrer);
+    q.set('s',[screen.width,screen.height,window.devicePixelRatio||1].join(','));
+    q.set('rnd',Math.random().toString(36).slice(2,8));
+    new Image().src='https://'+GC_CODE+'.goatcounter.com/count?'+q.toString();
+  }catch(e){}
+}
+function comboKey(){const c=combo();return c.t+'-'+c.m+'-'+c.f+'-'+c.b+(c.p?'-foto':'')}
+// Solo se registran elecciones hechas con un clic (no las que llegan por link ni el sorteo); nunca se envían nombre, profesión ni ciudad.
+document.addEventListener('click',e=>{
+  const t=e.target.closest?e.target:null;if(!t)return;
+  const b=t.closest('#pp .sw,#cs .sw,.ft[data-f],.bgb,#md button[data-m],#pf button[data-p]');
+  if(b){
+    if(b.getAttribute('aria-pressed')==='true')return;
+    if(b.matches('.sw'))track('color/'+b.dataset.t,'Color: '+b.textContent.trim(),1);
+    else if(b.matches('.ft'))track('tipografia/'+b.dataset.f,'Tipografía: '+b.querySelector('span').textContent.trim(),1);
+    else if(b.matches('.bgb'))track('fondo/'+b.dataset.b,'Fondo: '+nmTx(b),1);
+    else if(b.dataset.m)track('modo/'+b.dataset.m,'Modo '+(b.dataset.m==='light'?'claro':'oscuro'),1);
+    else track('foto/'+b.dataset.p,'Foto de perfil: '+(b.dataset.p==='on'?'con foto':'sin foto'),1);
+    return;
+  }
+  const a=t.closest('#sur,#rst,#vmb,#sh,#qm,#wa,#cwa,#bv,#vp,[data-plan]');
+  if(!a)return;
+  const k=a.id;
+  if(k==='sur')track('accion/sorprendeme','Botón Sorprendeme',1);
+  else if(k==='rst')track('accion/empezar-de-nuevo','Botón Empezar de nuevo',1);
+  else if(k==='vmb'){if(a.getAttribute('aria-checked')==='false')track('accion/vista-celular','Vista de celular',1)}
+  else if(k==='bv')track('accion/beneficios','Botón Beneficios',1);
+  else if(k==='vp')track('accion/ver-planes','Botón Ver planes y precios',1);
+  else{
+    // acciones de interés: guardan la combinación con la que llegó hasta acá
+    const name=k==='sh'?'compartir':k==='qm'?'quiero-el-mio':k==='wa'?'whatsapp':'plan';
+    track('accion/'+name,'Acción: '+name,1);
+    if(a.dataset.plan)track('plan/'+a.dataset.plan.toLowerCase().replace(/[^a-z]+/g,'-').replace(/-$/,''),'Plan: '+a.dataset.plan,1);
+    track('combo/'+comboKey(),'Combinación final: '+comboKey(),1);
+  }
+},true);
+// la visita de página la cuenta el script oficial de GoatCounter (al final del <body>); acá solo se registran los eventos
+
+// ---- vista de celular (marco de teléfono con la misma página adentro)
+var phoneFrame=null,phoneReady=false,phoneOn=false;
+const phEl=g$('ph'),pwEl=g$('pw'),vmb=g$('vmb');
+if(EMB||!/^(https?|file):$/.test(location.protocol))g$('vm').hidden=true;
+function phoneSrc(){const u=shareURL();return location.href.split(/[?#]/)[0]+u.slice(u.indexOf('?'))}
+function phoneState(){const c=combo();return{t:c.t,m:c.m,f:c.f,b:c.b,p:c.p,n:ME.n,r:ME.r,c:ME.c,l:LANG}}
+function syncPhone(){
+  if(!phoneFrame||!phoneReady||!phoneOn)return;
+  try{phoneFrame.contentWindow.postMessage({pv:'state',s:phoneState()},'*')}catch(e){}
+}
+function fitPhone(){
+  const r=phEl.getBoundingClientRect();
+  pwEl.style.setProperty('--ps',Math.max(.4,Math.min(1,(r.height-64)/788,(r.width-24)/414)).toFixed(3));
+}
+function phone(on){
+  phoneOn=on;phEl.hidden=!on;vmb.setAttribute('aria-checked',on?'true':'false');
+  if(!on)return;
+  if(!phoneFrame){
+    phoneFrame=document.createElement('iframe');
+    phoneFrame.name='pv-embed';phoneFrame.title='Vista de celular de tu portafolio';
+    phoneFrame.src=phoneSrc();
+    g$('ps').appendChild(phoneFrame);
+  }else syncPhone();
+  fitPhone();
+}
+vmb.onclick=()=>phone(vmb.getAttribute('aria-checked')!=='true');
+g$('phx').onclick=()=>phone(false);
+phEl.onclick=e=>{if(e.target===phEl)phone(false)};
+if('ResizeObserver' in window)new ResizeObserver(fitPhone).observe(phEl);
+else addEventListener('resize',fitPhone);
+addEventListener('message',e=>{
+  if(!phoneFrame||e.source!==phoneFrame.contentWindow||!e.data||e.data.pv!=='ready')return;
+  phoneReady=true;syncPhone();
+});
+// dentro del marco: la página recibe los cambios del panel
+function pvApply(s){
+  if(!s||typeof s!=='object')return;
+  const has=(sel,a,v)=>typeof v==='string'&&[...document.querySelectorAll(sel)].some(x=>x.dataset[a]===v);
+  if(has('#pp .sw','t',s.t))theme(s.t,true);
+  if(s.m==='dark'||s.m==='light')mode(s.m,true);
+  if(has('.ft[data-f]','f',s.f))font(s.f);
+  if(has('.bgb','b',s.b))bg(s.b);
+  setPhoto(s.p===true);
+  setMe({n:s.n,r:s.r,c:s.c});applyMe();
+  if((s.l==='en'||s.l==='es')&&s.l!==LANG)setLang(s.l);
+}
+if(EMB){
+  addEventListener('message',e=>{if(e.source===parent&&e.data&&e.data.pv==='state')pvApply(e.data.s)});
+  try{parent.postMessage({pv:'ready'},'*')}catch(e){}
+}
 applyMe();
 renderSummary();
 </script>
+<script data-goatcounter="https://rebelkidfbrii.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
