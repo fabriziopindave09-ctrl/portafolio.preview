@@ -355,9 +355,9 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 .ft em{position:absolute;top:-6px;right:-4px;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background:var(--st);color:var(--bg);font:700 .7rem/1 'Plus Jakarta Sans',sans-serif;font-style:normal}
 
 /* probalo con tu nombre + sorpresa */
-#me{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-#me .mt{display:block;margin-bottom:2px;font:600 .92rem 'Plus Jakarta Sans',sans-serif;color:var(--hd)}
-#me small{display:block;margin-bottom:12px;font-size:.72rem;color:var(--mut)}
+#me,#ex{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+#me .mt,#ex .mt{display:block;margin-bottom:2px;font:600 .92rem 'Plus Jakarta Sans',sans-serif;color:var(--hd)}
+#me small,#ex small{display:block;margin-bottom:12px;font-size:.72rem;color:var(--mut)}
 #me .fld{margin-bottom:10px;font-size:.72rem}
 #me .fld input{margin-top:4px;padding:10px 12px;font-size:16px}
 #mgo{display:none;width:100%;margin-top:4px;padding:11px 16px;font-size:.82rem;justify-content:center}
@@ -390,6 +390,12 @@ html[data-mode=light] .pk .nt.wn{color:#a8690f}
 #phx{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--line);border-radius:99px;background:var(--s2);color:var(--hd);font:500 .8rem 'Plus Jakarta Sans',sans-serif;cursor:pointer;white-space:nowrap}
 @media(max-width:700px){#ph,#vm{display:none!important}}
 html.emb #fabs,html.emb #pp,html.emb #ph,html.emb #toast{display:none!important}
+.exs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.exs button{display:flex;align-items:center;gap:6px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:none;color:var(--txt);font:500 .78rem 'Plus Jakarta Sans',sans-serif;cursor:pointer;text-align:left}
+.exs button i{width:16px;text-align:center;color:var(--st)}
+.exs button[aria-pressed=true]{background:var(--hd);border-color:var(--hd);color:var(--bg)}
+.exs button[aria-pressed=true] i{color:var(--bg)}
+.exs button:focus-visible{outline:2px solid var(--st);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -404,6 +410,16 @@ html.emb #fabs,html.emb #pp,html.emb #ph,html.emb #toast{display:none!important}
 <label class="fld">Tu nombre<input id="mn" type="text" maxlength="40" autocomplete="off" placeholder="Ej: Lucía Fernández"></label>
 <label class="fld">Tu profesión<input id="mr" type="text" maxlength="40" autocomplete="off" placeholder="Ej: Diseñadora gráfica"></label>
 <label class="fld">Tu ciudad<input id="mc" type="text" maxlength="40" autocomplete="off" placeholder="Ej: Rosario, Santa Fe"></label>
+</div>
+<div id="ex">
+<b class="mt">Ejemplo completo por rubro</b>
+<small>Cargá un perfil de muestra para imaginar el resultado final. Tu nombre, profesión y ciudad se ponen encima.</small>
+<div class="exs">
+<button type="button" data-e="gastro" aria-pressed="false"><i class="fas fa-utensils"></i>Gastronomía</button>
+<button type="button" data-e="salud" aria-pressed="false"><i class="fas fa-heart-pulse"></i>Salud</button>
+<button type="button" data-e="tech" aria-pressed="false"><i class="fas fa-laptop-code"></i>Tecnología</button>
+<button type="button" data-e="" aria-pressed="true"><i class="fas fa-file-lines"></i>Sin ejemplo</button>
+</div>
 <button class="btn" id="mgo" type="button"><i class="fas fa-eye"></i>Ver cómo queda</button>
 </div>
 <div class="seg" id="rn"><button id="sur" type="button"><i class="fas fa-dice"></i>Sorprendeme</button><button id="rst" type="button"><i class="fas fa-rotate-left"></i>Empezar de nuevo</button></div>
@@ -808,7 +824,7 @@ sws.forEach(s=>s.onclick=()=>theme(s.dataset.t,true));
 let sv,seen;
 try{sv=localStorage.getItem('pv-theme');seen=sessionStorage.getItem('pv-seen')}catch(e){}
 if(sv&&document.querySelector('.sw[data-t="'+sv+'"]'))theme(sv,false);
-if(!seen&&!EMB&&!/[?&](t|m|f|b|p|n|r|c)=/.test(location.search)){setTimeout(()=>openP(true),600);try{sessionStorage.setItem('pv-seen','1')}catch(e){}}
+if(!seen&&!EMB&&!/[?&](t|m|f|b|p|n|r|c|e)=/.test(location.search)){setTimeout(()=>openP(true),600);try{sessionStorage.setItem('pv-seen','1')}catch(e){}}
 const bp=document.getElementById('bp'),cs=document.getElementById('cs');
 document.getElementById('bv').onclick=()=>{openP(false);bp.showModal()};
 bp.querySelector('.bx').onclick=()=>bp.close();
@@ -879,6 +895,8 @@ bg(sb&&document.querySelector('.bgb[data-b="'+sb+'"]')?sb:'grid');
 
 // ---- "Probalo con tu nombre": nombre, profesión y ciudad en vivo
 const ME={n:'',r:'',c:''},T0=document.title;
+var SMP=null;
+function V(){const p=SMP?exPersona():null;return{n:ME.n||(p&&p.n)||'',r:ME.r||(p&&p.r)||'',c:ME.c||(p&&p.c)||''}}
 const mTx=el=>[...el.childNodes].find(n=>n.nodeType===3&&n.nodeValue.trim());
 const g$=id=>document.getElementById(id);
 const mn=g$('mn'),mr=g$('mr'),mc=g$('mc');
@@ -890,29 +908,29 @@ const capFirst=s=>s===s.toLowerCase()?up1(s):s;
 const slug=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
 const MAIL0='nombre.apellido@email.com';
 const slots=[
-  ['lgI',()=>{const w=ME.n.split(' '),a=[...w[0]],b=[...w[w.length-1]];return(w.length>1?a[0]+b[0]:a.slice(0,2).join('')).toLocaleUpperCase('es')},'n'],
-  ['lgN',()=>ME.n.toLocaleUpperCase('es'),'n'],
-  ['h1',()=>{const w=ME.n.split(' ');return w.length>1?w.slice(0,-1).join(' ')+' ':''},'n',()=>g$('h1').firstChild],
-  ['h1b',()=>{const w=ME.n.split(' ');return w[w.length-1]},'n'],
-  ['bdC',()=>ME.c,'c'],
-  ['rlA',()=>ME.r,'r'],
-  ['abR',()=>ME.r,'r'],
-  ['bcN',()=>ME.n,'n'],
-  ['bcR',()=>ME.r,'r'],
+  ['lgI',()=>{const w=V().n.split(' '),a=[...w[0]],b=[...w[w.length-1]];return(w.length>1?a[0]+b[0]:a.slice(0,2).join('')).toLocaleUpperCase('es')},'n'],
+  ['lgN',()=>V().n.toLocaleUpperCase('es'),'n'],
+  ['h1',()=>{const w=V().n.split(' ');return w.length>1?w.slice(0,-1).join(' ')+' ':''},'n',()=>g$('h1').firstChild],
+  ['h1b',()=>{const w=V().n.split(' ');return w[w.length-1]},'n'],
+  ['bdC',()=>V().c,'c'],
+  ['rlA',()=>V().r,'r'],
+  ['abR',()=>V().r,'r'],
+  ['bcN',()=>V().n,'n'],
+  ['bcR',()=>V().r,'r'],
   ['bcE',()=>meMail()||null,'n'],
-  ['bcC',()=>ME.c,'c'],
+  ['bcC',()=>V().c,'c'],
   ['ctE',()=>meMail()||null,'n'],
-  ['ctC',()=>ME.c,'c'],
-  ['ftC',()=>ME.c,'c']
+  ['ctC',()=>V().c,'c'],
+  ['ftC',()=>V().c,'c']
 ].map(([id,f,k,nd])=>{const node=nd?nd():mTx(g$(id));return{node,o:node.nodeValue,f,k}});
 function meMail(){
-  const w=ME.n.split(' ').filter(Boolean);if(!w.length)return'';
+  const w=V().n.split(' ').filter(Boolean);if(!w.length)return'';
   const a=slug(w[0]),b=w.length>1?slug(w[w.length-1]):'';
   if(!a)return'';return(b?a+'.'+b:a)+'@email.com';
 }
 function trKeep(o){const m=o.match(/^(\s*)([\s\S]*?)(\s*)$/);return m[1]+tr(m[2])+m[3]}
 function applyMe(){
-  slots.forEach(s=>{const v=ME[s.k]?s.f():null;s.node.nodeValue=(v||v==='')&&ME[s.k]?v:trKeep(s.o)});
+  slots.forEach(s=>{const E=V(),v=E[s.k]?s.f():null;s.node.nodeValue=(v||v==='')&&E[s.k]?v:trKeep(s.o)});
   const mail=meMail()||MAIL0;
   g$('ctM').href='mailto:'+mail;
   g$('ctEc').onclick=()=>copy(mail,'Email copiado');
@@ -950,7 +968,7 @@ g$('sur').onclick=()=>{
 };
 g$('rst').onclick=()=>{
   theme('green',true);mode('dark',true);font('base');bg('grid');setPhoto(false);
-  setMe({n:'',r:'',c:''});applyMe();saveMe();renderSummary();
+  setSample('');setMe({n:'',r:'',c:''});applyMe();saveMe();renderSummary();
   try{history.replaceState(null,'',location.pathname)}catch(e){}
 };
 
@@ -976,6 +994,7 @@ function setLang(l){
     });
   });
   document.querySelectorAll('#lg span[data-l]').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
+  if(SMP)exApply();
   applyMe();
   if(!EMB)try{localStorage.setItem('pv-lang',l)}catch(e){}
   try{renderSummary()}catch(e){}
@@ -1016,11 +1035,11 @@ function comboInfo(){
   if(c.p)plus.push('foto de perfil');
   const def=c.t==='green'&&c.m==='dark'&&c.f==='base'&&c.b==='grid'&&!c.p;
   const text='color '+col+' (modo '+modeN.toLowerCase()+'), fondo '+bgn+', tipografía '+ft.toLowerCase()+', '+(c.p?'con':'sin')+' foto de perfil';
-  return{c,chips,plus,def,text,me:meText()};
+  return{c,chips,plus,def,text,me:meText(),ex:SMP?EJ[SMP].lb:''};
 }
 function shareURL(){
   const c=combo(),q=new URLSearchParams();
-  q.set('t',c.t);q.set('m',c.m);if(c.f!=='base')q.set('f',c.f);q.set('b',c.b);if(c.p)q.set('p','1');if(ME.n)q.set('n',ME.n);if(ME.r)q.set('r',ME.r);if(ME.c)q.set('c',ME.c);if(LANG==='en')q.set('l','en');
+  q.set('t',c.t);q.set('m',c.m);if(c.f!=='base')q.set('f',c.f);q.set('b',c.b);if(c.p)q.set('p','1');if(SMP)q.set('e',SMP);if(ME.n)q.set('n',ME.n);if(ME.r)q.set('r',ME.r);if(ME.c)q.set('c',ME.c);if(LANG==='en')q.set('l','en');
   const cn=document.querySelector('link[rel=canonical]');
   const base=/^https?:/.test(location.href)?location.href.split(/[?#]/)[0]:(cn?cn.href:location.href.split(/[?#]/)[0]);
   return base+'?'+q.toString();
@@ -1036,7 +1055,7 @@ function renderSummary(){
   else{n1.className='nt ok';n1.textContent='Incluye tu combinación actual.'}
   n2.className='nt ok';n2.textContent='Incluye todo lo que elegiste.';
   pk[0].classList.toggle('rec',!need&&!i.def);pk[1].classList.toggle('rec',need);
-  const bits=[];if(!i.def)bits.push('Mi combinación: '+i.text+'.');if(i.me)bits.push('Mis datos: '+i.me+'.');
+  const bits=[];if(!i.def)bits.push('Mi combinación: '+i.text+'.');if(i.me)bits.push('Mis datos: '+i.me+'.');if(i.ex)bits.push('Rubro de ejemplo: '+i.ex+'.');
   const msg='Hola! Vi la preview de portafolios virtuales y quiero el mío.'+(bits.length?' '+bits.join(' ')+' '+shareURL():'');
   document.getElementById('wa').href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg);
   syncPhone();
@@ -1048,10 +1067,10 @@ let lastAuto='';
 function openForm(plan){
   const i=comboInfo(),m=cform.elements.message,sel=document.getElementById('plan');
   if(plan)sel.value=plan;else if(!i.def)sel.value=i.plus.length?'Paquete completo +':'Paquete completo';
-  const ab=[];if(!i.def)ab.push('Esta es mi combinación de la preview: '+i.text+'.');if(i.me)ab.push('Mis datos: '+i.me+'.');
+  const ab=[];if(!i.def)ab.push('Esta es mi combinación de la preview: '+i.text+'.');if(i.me)ab.push('Mis datos: '+i.me+'.');if(i.ex)ab.push('Rubro de ejemplo: '+i.ex+'.');
   const auto=ab.length?'Hola! '+ab.join(' '):'';
   if(m.value.trim()===''||m.value===lastAuto){m.value=auto;lastAuto=auto}
-  document.getElementById('cl').value=(i.def&&!i.me)?'':shareURL();
+  document.getElementById('cl').value=(i.def&&!i.me&&!i.ex)?'':shareURL();
   cf.showModal();
 }
 async function shareCombo(){
@@ -1063,6 +1082,107 @@ async function shareCombo(){
   copy(u,'Link de tu combinación copiado');
 }
 document.getElementById('sh').onclick=shareCombo;
+// ---- ejemplo completo por rubro (perfiles de muestra, en español)
+const EJ={
+gastro:{lb:'Gastronomía',n:'Martina Quiroga',r:'Cocinera profesional',c:'Mendoza, Argentina',
+ro:['Cocina de autor','Gestión de equipos'],sl:'Cocina con identidad: sabor, orden y trabajo en equipo en cada servicio.',
+ah:'Cocinera con 8 años de experiencia en restaurantes, hoteles y eventos.',
+a1:' con formación terciaria en gastronomía. Trabajé en cocinas de alto volumen, armé cartas de temporada y coordiné equipos de hasta 12 personas.',
+a2:'Busco sumarme a un proyecto gastronómico donde pueda aportar creatividad, orden y buen clima de trabajo.',
+ch:['Cocina caliente','Pastelería','Costos y stock','Liderazgo','Manipulación de alimentos','Licencia de conducir'],
+hl:[['Producto local:','platos de autor con ingredientes de la región.'],['Orden en servicio:','organización de la partida y control de tiempos.'],['Disponibilidad:','horarios rotativos, fines de semana y temporada alta.']],
+fl:['Cocina','Salón y barra','Eventos'],
+ex:[['a','2022 – Actualidad','Restaurante Raíz','Jefa de partida','Coordino la cocina caliente y el pase en un salón de 80 cubiertos.',['Carta de temporada con producto local.','Menos desperdicio gracias al control de stock.']],
+['a','2019 – 2022','Hotel Andes','Cocinera','Desayunos, banquetes y servicio a la carta.',['Servicio para eventos de hasta 200 personas.']],
+['b','2018 – 2019','Bar Malbec','Barista y servicio de barra','Atención de barra y salón en horarios pico.',['Café de especialidad y coctelería básica.']],
+['b','2017 – 2018','Café Plaza','Ayudante de cocina','Mise en place y pastelería diaria.',[]],
+['c','Temporada 2024','Catering Sabores','Cocinera de eventos','Producción de menús para casamientos y eventos corporativos.',['Trabajo en equipo bajo presión.','Logística y armado en el lugar.']]],
+tg:[['Cocina caliente','Pastelería','Mise en place','Costos y stock','Armado de cartas','Trabajo bajo presión'],['Atención al público','Barista','Coctelería básica','Inglés básico','Planilla de stock','Organización']],
+ed:[['Tecnicatura en Gastronomía','Instituto Cuyo','2018'],['Bachiller en Economía','Escuela Nº 4-012','Completo'],['Estudios primarios','Escuela Nº 1-345','Completo']],
+ce:[['Carnet de manipulación de alimentos','Vigente'],['Licencia de conducir','Categoría B1']],
+cu:[['Cocina de autor','Escuela de Cocineros'],['Pastelería profesional','Instituto Cuyo'],['Costos gastronómicos','Cámara de Turismo'],['Inglés para el servicio','Centro de Idiomas · 2023']]},
+salud:{lb:'Salud',n:'Camila Sosa',r:'Kinesióloga',c:'Rosario, Argentina',
+ro:['Rehabilitación deportiva','Atención domiciliaria'],sl:'Acompaño a cada paciente con un plan claro para recuperar movimiento y bienestar.',
+ah:'Kinesióloga con 6 años de experiencia en rehabilitación y atención domiciliaria.',
+a1:' graduada de la Universidad Nacional de Rosario. Trabajo con pacientes de todas las edades, combinando ejercicio terapéutico, educación y seguimiento personalizado.',
+a2:'Busco sumar mi experiencia a un centro de salud o equipo interdisciplinario que priorice la atención cercana.',
+ch:['Trato con pacientes','Empatía','Trabajo interdisciplinario','Historia clínica','Primeros auxilios','Licencia de conducir'],
+hl:[['Plan a medida:','objetivos claros y seguimiento de cada etapa.'],['Enfoque deportivo:','recuperación de lesiones y prevención.'],['Movilidad:','atención en consultorio y a domicilio.']],
+fl:['Clínica','Domiciliaria','Deporte'],
+ex:[['a','2021 – Actualidad','Centro Kinésico Litoral','Kinesióloga','Rehabilitación traumatológica y deportiva en consultorio.',['Más de 40 pacientes por mes.','Planes de ejercicio terapéutico a medida.']],
+['a','2019 – 2021','Clínica Del Parque','Kinesióloga de guardia','Atención de pacientes internados y ambulatorios.',['Trabajo junto a traumatólogos y enfermería.']],
+['b','2020 – Actualidad','Atención domiciliaria','Kinesióloga independiente','Sesiones a domicilio para adultos mayores y posoperatorios.',['Seguimiento y registro de la evolución.']],
+['b','2019','Obra social Salud Sur','Prestadora','Atención de afiliados con derivación médica.',[]],
+['c','2018 – 2019','Club Atlético Rosario','Kinesióloga de juveniles','Prevención de lesiones y recuperación de deportistas.',['Entrenamiento de movilidad y fuerza.','Charlas de prevención para entrenadores.']]],
+tg:[['Evaluación funcional','Ejercicio terapéutico','Rehabilitación deportiva','Terapia manual','Seguimiento de pacientes','Educación al paciente'],['Historia clínica','Trabajo en equipo','Atención domiciliaria','Primeros auxilios','Paquete Office','Organización']],
+ed:[['Licenciatura en Kinesiología','Universidad Nacional de Rosario','2018'],['Bachiller en Ciencias Naturales','Escuela Nº 3-210','Completo'],['Estudios primarios','Escuela Nº 1-120','Completo']],
+ce:[['Matrícula profesional','Vigente'],['Licencia de conducir','Categoría B1']],
+cu:[['RCP y primeros auxilios','Cruz Roja'],['Rehabilitación deportiva','Colegio de Kinesiólogos'],['Kinesiología respiratoria','Hospital Provincial'],['Ejercicio terapéutico','Universidad Nacional · 2023']]},
+tech:{lb:'Tecnología',n:'Nicolás Paz',r:'Desarrollador web',c:'Buenos Aires, Argentina',
+ro:['Frontend y diseño web','Proyectos freelance'],sl:'Construyo sitios rápidos, claros y fáciles de mantener para negocios y marcas personales.',
+ah:'Desarrollador web con 5 años creando sitios y aplicaciones para clientes de distintos rubros.',
+a1:' con base en frontend y experiencia en proyectos freelance y de equipo. Cuido el diseño, la velocidad y la experiencia de uso en el celular.',
+a2:'Busco un equipo de producto donde seguir creciendo y aportar código limpio y buena comunicación.',
+ch:['JavaScript','HTML y CSS','Diseño responsive','Git y GitHub','Resolución de problemas','Inglés técnico'],
+hl:[['Entrega prolija:','código claro, documentado y fácil de mantener.'],['Foco en el usuario:','sitios rápidos que se ven bien en el celular.'],['Autonomía:','trabajo remoto con buena comunicación.']],
+fl:['Empresa','Freelance','Soporte'],
+ex:[['a','2023 – Actualidad','Estudio Pixel','Desarrollador frontend','Sitios y tiendas online para los clientes del estudio.',['Mejoras de velocidad de carga en sitios existentes.','Trabajo en equipo con diseño y producto.']],
+['a','2021 – 2023','Startup Nube','Desarrollador web junior','Mantenimiento de una plataforma web y nuevas funciones.',['Integración con APIs de pago.']],
+['b','2020 – Actualidad','Proyectos independientes','Desarrollador freelance','Portafolios, landings y sistemas a medida para pequeños negocios.',['Más de 20 sitios entregados.']],
+['b','2020','Agencia Norte','Pasante de desarrollo','Maquetado y correcciones en sitios de clientes.',[]],
+['c','2019 – 2020','Soporte técnico','Técnico de soporte','Atención de consultas y resolución de problemas de usuarios.',['Documentación de soluciones frecuentes.','Comunicación clara con personas no técnicas.']]],
+tg:[['JavaScript','HTML y CSS','React','Node.js','Git y GitHub','APIs REST'],['Diseño responsive','Figma','SEO básico','Inglés técnico','Metodologías ágiles','Comunicación']],
+ed:[['Tecnicatura en Desarrollo de Software','Instituto Politécnico','2021'],['Bachiller en Informática','Escuela Técnica Nº 7','Completo'],['Estudios primarios','Escuela Nº 12','Completo']],
+ce:[['Certificación en JavaScript','Vigente'],['Licencia de conducir','Categoría B1']],
+cu:[['React desde cero','Plataforma online'],['Diseño UX/UI','Escuela de Diseño'],['Git y trabajo en equipo','Bootcamp Code'],['Inglés técnico','Instituto de Idiomas · 2024']]}
+};
+function exPersona(){return EJ[SMP]}
+const EXSEL='.roles span:nth-child(n+2),.slogan,.about h3,.about p:nth-of-type(2),.chip,.hl li,.f:not([data-f=all]),#exp,.sk .tags,.edu .eh,.edu>div:first-child .mini,.edu>div:nth-child(2)>.card';
+let EXS=null,EXT=null;
+function setT(el,v){
+  let n=[...el.childNodes].filter(x=>x.nodeType===3).pop();
+  if(!n){n=document.createTextNode('');el.appendChild(n)}
+  if(!origTx.has(n))origTx.set(n,n.nodeValue);
+  n.nodeValue=v;
+}
+function exApply(){
+  const E=EJ[SMP],Q=s=>[...document.querySelectorAll(s)];
+  if(!EXS){EXS=Q(EXSEL).map(el=>[el,el.innerHTML]);EXT=[...document.querySelector('.about p').childNodes].filter(n=>n.nodeType===3).pop()}
+  const rs=Q('.roles span');setT(rs[1],E.ro[0]);setT(rs[2],E.ro[1]);
+  setT(document.querySelector('.slogan'),E.sl);setT(document.querySelector('.about h3'),E.ah);
+  if(!origTx.has(EXT))origTx.set(EXT,EXT.nodeValue);EXT.nodeValue=E.a1;
+  setT(Q('.about p')[1],E.a2);
+  Q('.chip').forEach((c,i)=>E.ch[i]&&setT(c,E.ch[i]));
+  Q('.hl li').forEach((li,i)=>{const h=E.hl[i];if(h){li.querySelector('strong').textContent=h[0];setT(li.querySelector('span'),' '+h[1])}});
+  Q('.f:not([data-f=all])').forEach((f,i)=>setT(f,E.fl[i]));
+  const ic=['building','briefcase','user-tie','diagram-project','concierge-bell'];
+  document.getElementById('exp').innerHTML=E.ex.map((x,i)=>'<article class="card exp '+(x[0]==='c'?'cat-c wide':'cat-'+x[0])+'"><div class="top"><span class="date">'+x[1]+'</span><i class="fas fa-'+ic[i%5]+'"></i></div><h3>'+x[2]+'</h3><p class="role">'+x[3]+'</p><p>'+x[4]+'</p>'+(x[5].length?'<ul>'+x[5].map(l=>'<li>'+l+'</li>').join('')+'</ul>':'')+'</article>').join('');
+  const f=document.querySelector('.f[data-f=all]');if(f)f.click();
+  Q('.sk .tags').forEach((t,i)=>t.innerHTML=E.tg[i].map(x=>'<span>'+x+'</span>').join(''));
+  Q('.edu .eh').forEach((e,i)=>{setT(e.querySelector('h4'),E.ed[i][0]);setT(e.querySelector('em'),E.ed[i][1]);setT(e.querySelector('.yr'),E.ed[i][2])});
+  Q('.edu>div:first-child .mini').forEach((m,i)=>{setT(m.querySelector('h5'),E.ce[i][0]);setT(m.querySelector('p'),E.ce[i][1])});
+  const ci=['pen-ruler','laptop-code','language','chart-line'];
+  document.querySelector('.edu>div:nth-child(2)>.card').innerHTML=E.cu.map((c,i)=>'<div class="mini"><i class="fas fa-'+ci[i]+'"></i><div><h5>'+c[0]+'</h5><p>'+c[1]+'</p></div></div>').join('');
+}
+function exClear(){
+  if(!EXS)return;
+  EXS.forEach(([el,h])=>{el.innerHTML=h;el.querySelectorAll('.rv').forEach(x=>x.classList.remove('rv','in'))});
+  const o=origTx.get(EXT);if(o!=null)EXT.nodeValue=o;
+  const f=document.querySelector('.f[data-f=all]');if(f)f.click();
+  if(LANG==='en')setLang('en');
+}
+function setSample(id){
+  const had=!!SMP;
+  SMP=Object.prototype.hasOwnProperty.call(EJ,id)?id:null;
+  document.querySelectorAll('#ex button[data-e]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.e===(SMP||'')));
+  if(SMP)exApply();else if(had)exClear();
+  applyMe();
+  try{if(SMP)sessionStorage.setItem('pv-ex',SMP);else sessionStorage.removeItem('pv-ex')}catch(e){}
+  try{renderSummary()}catch(e){}
+}
+document.querySelectorAll('#ex button[data-e]').forEach(b=>b.onclick=()=>setSample(b.dataset.e));
+try{const x=sessionStorage.getItem('pv-ex');if(x)setSample(x)}catch(e){}
+
 // ---- cargar la combinación desde el link (?t=…&m=…&f=…&b=…&p=1&n=…&r=…&c=…&l=en)
 (function(){
   let q;try{q=new URLSearchParams(location.search)}catch(e){return}
@@ -1073,6 +1193,7 @@ document.getElementById('sh').onclick=shareCombo;
   if(has('.ft[data-f]','f',f)){font(f);any=true}
   if(has('.bgb','b',b)){bg(b);any=true}
   if(q.get('p')==='1'){av.hidden=false;document.querySelectorAll('#pf button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.p==='on'));any=true}
+  const le=q.get('e');if(le&&Object.prototype.hasOwnProperty.call(EJ,le)){setSample(le);any=true}
   const ln=q.get('n'),lr=q.get('r'),lc=q.get('c');
   if(ln||lr||lc){setMe({n:ln,r:lr,c:lc});applyMe();saveMe();any=true}
   if(q.get('l')==='en')setLang('en');
@@ -1097,10 +1218,11 @@ function comboKey(){const c=combo();return c.t+'-'+c.m+'-'+c.f+'-'+c.b+(c.p?'-fo
 // Solo se registran elecciones hechas con un clic (no las que llegan por link ni el sorteo); nunca se envían nombre, profesión ni ciudad.
 document.addEventListener('click',e=>{
   const t=e.target.closest?e.target:null;if(!t)return;
-  const b=t.closest('#pp .sw,#cs .sw,.ft[data-f],.bgb,#md button[data-m],#pf button[data-p]');
+  const b=t.closest('#pp .sw,#cs .sw,.ft[data-f],.bgb,#md button[data-m],#pf button[data-p],#ex button[data-e]');
   if(b){
     if(b.getAttribute('aria-pressed')==='true')return;
-    if(b.matches('.sw'))track('color/'+b.dataset.t,'Color: '+b.textContent.trim(),1);
+    if(b.matches('#ex button'))track('ejemplo/'+(b.dataset.e||'generico'),'Ejemplo: '+b.textContent.trim(),1);
+    else if(b.matches('.sw'))track('color/'+b.dataset.t,'Color: '+b.textContent.trim(),1);
     else if(b.matches('.ft'))track('tipografia/'+b.dataset.f,'Tipografía: '+b.querySelector('span').textContent.trim(),1);
     else if(b.matches('.bgb'))track('fondo/'+b.dataset.b,'Fondo: '+nmTx(b),1);
     else if(b.dataset.m)track('modo/'+b.dataset.m,'Modo '+(b.dataset.m==='light'?'claro':'oscuro'),1);
@@ -1130,7 +1252,7 @@ var phoneFrame=null,phoneReady=false,phoneOn=false;
 const phEl=g$('ph'),pwEl=g$('pw'),vmb=g$('vmb');
 if(EMB||!/^(https?|file):$/.test(location.protocol))g$('vm').hidden=true;
 function phoneSrc(){const u=shareURL();return location.href.split(/[?#]/)[0]+u.slice(u.indexOf('?'))}
-function phoneState(){const c=combo();return{t:c.t,m:c.m,f:c.f,b:c.b,p:c.p,n:ME.n,r:ME.r,c:ME.c,l:LANG}}
+function phoneState(){const c=combo();return{t:c.t,m:c.m,f:c.f,b:c.b,p:c.p,n:ME.n,r:ME.r,c:ME.c,e:SMP||'',l:LANG}}
 function syncPhone(){
   if(!phoneFrame||!phoneReady||!phoneOn)return;
   try{phoneFrame.contentWindow.postMessage({pv:'state',s:phoneState()},'*')}catch(e){}
@@ -1168,6 +1290,7 @@ function pvApply(s){
   if(has('.ft[data-f]','f',s.f))font(s.f);
   if(has('.bgb','b',s.b))bg(s.b);
   setPhoto(s.p===true);
+  setSample(typeof s.e==='string'?s.e:'');
   setMe({n:s.n,r:s.r,c:s.c});applyMe();
   if((s.l==='en'||s.l==='es')&&s.l!==LANG)setLang(s.l);
 }
