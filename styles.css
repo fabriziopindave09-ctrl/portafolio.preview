@@ -270,6 +270,17 @@ html[data-font]:not([data-font=base]) :is(h1,h2,h3,h4){letter-spacing:normal}
 .bgx-rombos,html[data-bg=rombos] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),repeating-linear-gradient(45deg,var(--line) 0 1px,transparent 1px calc(var(--g)*.5)),repeating-linear-gradient(-45deg,var(--line) 0 1px,transparent 1px calc(var(--g)*.5))}
 .bgx-rayos,html[data-bg=rayos] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),repeating-conic-gradient(from 0deg at 50% 0,var(--line) 0 .6deg,transparent .6deg 7deg)}
 .bgx-tablero,html[data-bg=tablero] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),conic-gradient(color-mix(in srgb,var(--line) 55%,transparent) 25%,transparent 0 50%,color-mix(in srgb,var(--line) 55%,transparent) 0 75%,transparent 0) 0 0/calc(var(--g)*.75) calc(var(--g)*.75)}
+
+/* fondos animados (Paquete completo +): Código (canvas) y Foco (halo que sigue al cursor) */
+#fxc{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.62}
+.bgx-codigo,html[data-bg=codigo] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%)}
+.bgx-codigo{background:linear-gradient(180deg,var(--bg),transparent 35%,transparent 55%,var(--bg)),repeating-linear-gradient(180deg,transparent 0 3px,var(--bg) 3px 5px),repeating-linear-gradient(90deg,color-mix(in srgb,var(--st) 60%,transparent) 0 2px,transparent 2px 6px)}
+html[data-bg=codigo] .hero:before{background:radial-gradient(ellipse 58% 52% at 50% 48%,rgba(var(--bgrgb),.84),rgba(var(--bgrgb),.42) 58%,transparent 100%)}
+.bgx-foco{background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--st) 34%,transparent),transparent 62%)}
+html[data-bg=foco] .hero{background:radial-gradient(circle 320px at var(--mx,50%) var(--my,38%),color-mix(in srgb,var(--st) 28%,transparent),transparent 72%),radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%)}
+.bgx-foco::after,html[data-bg=foco] .hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(var(--st) 1px,transparent 1px) 0 0/var(--g) var(--g),linear-gradient(90deg,var(--st) 1px,transparent 1px) 0 0/var(--g) var(--g);opacity:.4}
+html[data-bg=foco] .hero::after{-webkit-mask:radial-gradient(circle 280px at var(--mx,50%) var(--my,38%),#000,transparent 78%);mask:radial-gradient(circle 280px at var(--mx,50%) var(--my,38%),#000,transparent 78%)}
+.bgx-foco::after{-webkit-mask:radial-gradient(circle 30px at 50% 50%,#000,transparent 80%);mask:radial-gradient(circle 30px at 50% 50%,#000,transparent 80%)}
 html[data-bg=aurora] .hero:before,html[data-bg=malla] .hero:before{opacity:.3}
 #bk{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 #bk small{display:block;font-size:.72rem;color:var(--mut)}
