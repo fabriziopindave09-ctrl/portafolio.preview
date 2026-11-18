@@ -240,7 +240,10 @@ html[data-font=impact]{--fh:'Bebas Neue'}
 html[data-font=geo]{--fh:'Montserrat'}
 html[data-font=classic]{--fh:'Cormorant Garamond'}
 html[data-font=future]{--fh:'Orbitron'}
-html[data-font=editorial] :is(h1,h2,h3,h4),html[data-font=impact] :is(h1,h2,h3,h4){font-weight:400}
+html[data-font=warm]{--fh:'Fraunces'}
+html[data-font=minimal]{--fh:'Josefin Sans'}
+html[data-font=display]{--fh:'Abril Fatface'}
+html[data-font=editorial] :is(h1,h2,h3,h4),html[data-font=impact] :is(h1,h2,h3,h4),html[data-font=display] :is(h1,h2,h3,h4){font-weight:400}
 html[data-font=impact] :is(h1,h2,h3,h4){letter-spacing:.02em!important}
 html[data-font=future] :is(h1,h2,h3,h4){letter-spacing:.01em!important}
 html[data-font]:not([data-font=base]) :is(h1,h2,h3,h4){letter-spacing:normal}
@@ -264,6 +267,9 @@ html[data-font]:not([data-font=base]) :is(h1,h2,h3,h4){letter-spacing:normal}
 .bgx-ondas,html[data-bg=ondas] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),repeating-radial-gradient(circle at 50% 115%,transparent 0 calc(var(--g)*.5),var(--line) calc(var(--g)*.5) calc(var(--g)*.5 + 1px))}
 .bgx-malla,html[data-bg=malla] .hero{background:radial-gradient(40% 55% at 0 0,color-mix(in srgb,var(--st) 28%,transparent),transparent 75%),radial-gradient(40% 55% at 100% 0,color-mix(in srgb,var(--si) 18%,transparent),transparent 75%),radial-gradient(50% 55% at 100% 100%,color-mix(in srgb,var(--st) 22%,transparent),transparent 75%),radial-gradient(40% 55% at 0 100%,color-mix(in srgb,var(--si) 14%,transparent),transparent 75%)}
 .bgx-franjas,html[data-bg=franjas] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px calc(var(--g)*.75))}
+.bgx-rombos,html[data-bg=rombos] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),repeating-linear-gradient(45deg,var(--line) 0 1px,transparent 1px calc(var(--g)*.5)),repeating-linear-gradient(-45deg,var(--line) 0 1px,transparent 1px calc(var(--g)*.5))}
+.bgx-rayos,html[data-bg=rayos] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),repeating-conic-gradient(from 0deg at 50% 0,var(--line) 0 .6deg,transparent .6deg 7deg)}
+.bgx-tablero,html[data-bg=tablero] .hero{background:radial-gradient(60% 50% at 50% 0,var(--glow),transparent 70%),conic-gradient(color-mix(in srgb,var(--line) 55%,transparent) 25%,transparent 0 50%,color-mix(in srgb,var(--line) 55%,transparent) 0 75%,transparent 0) 0 0/calc(var(--g)*.75) calc(var(--g)*.75)}
 html[data-bg=aurora] .hero:before,html[data-bg=malla] .hero:before{opacity:.3}
 #bk{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 #bk small{display:block;font-size:.72rem;color:var(--mut)}
@@ -395,6 +401,12 @@ html[data-theme=orange][data-mode=light]{--bg:#fbf4ec;--s1:#fffdfa;--s2:#f5e8d8;
 html[data-theme=yellow][data-mode=light]{--bg:#faf7e8;--s1:#fffef8;--s2:#f3edcf;--line:#e4dbb0;--txt:#665d2e;--hd:#241f06;--si:#40380f;--st:#8f7a0c;--hov:#cfc27a;--mut:#9b9164;--glow:rgba(143,122,12,.14);--bgrgb:250,247,232;--s1rgb:255,254,248}
 html[data-theme=teal][data-mode=light]{--bg:#eef8f8;--s1:#fafefe;--s2:#dff0f0;--line:#c4e0e1;--txt:#44686a;--hd:#07191b;--si:#1c3d3f;--st:#0e8489;--hov:#8cc4c6;--mut:#6f9294;--glow:rgba(14,132,137,.14);--bgrgb:238,248,248;--s1rgb:250,254,254}
 html[data-theme=lime][data-mode=light]{--bg:#f4f9e8;--s1:#fcfef7;--s2:#e7f0cf;--line:#d3e2ae;--txt:#516a22;--hd:#121c04;--si:#2b3d0c;--st:#5a8a0a;--hov:#a9c874;--mut:#869a5e;--glow:rgba(90,138,10,.14);--bgrgb:244,249,232;--s1rgb:252,254,247}
+html[data-theme=fuchsia]{--bg:#160a16;--s1:#1f111f;--s2:#291729;--line:#432244;--txt:#c9a8c8;--hd:#fbf3fb;--si:#e8d0e7;--st:#e879d6;--hov:#7a3a78;--mut:#94708f;--glow:rgba(232,121,214,.17);--bgrgb:22,10,22;--s1rgb:31,17,31}
+html[data-theme=brown]{--bg:#14100c;--s1:#1d1712;--s2:#271f18;--line:#3d3226;--txt:#c4b29e;--hd:#faf6f1;--si:#e3d6c6;--st:#c8a27a;--hov:#6e5a43;--mut:#8f7e6a;--glow:rgba(200,162,122,.17);--bgrgb:20,16,12;--s1rgb:29,23,18}
+html[data-theme=indigo]{--bg:#0c0f1f;--s1:#121629;--s2:#181d36;--line:#2a3160;--txt:#aeb4d6;--hd:#f3f4fc;--si:#d3d7ee;--st:#7f8cf5;--hov:#3d4a99;--mut:#747ca3;--glow:rgba(127,140,245,.17);--bgrgb:12,15,31;--s1rgb:18,22,41}
+html[data-theme=fuchsia][data-mode=light]{--bg:#fbf0fa;--s1:#fffafe;--s2:#f4dff2;--line:#e6c6e3;--txt:#6a3f68;--hd:#2a0c28;--si:#4a2248;--st:#a8239a;--hov:#d4a0d0;--mut:#9c7899;--glow:rgba(168,35,154,.14);--bgrgb:251,240,250;--s1rgb:255,250,254}
+html[data-theme=brown][data-mode=light]{--bg:#f8f3ec;--s1:#fffdfa;--s2:#efe5d7;--line:#ddcdb6;--txt:#5e4a35;--hd:#24180c;--si:#3d2d1b;--st:#8a5a2b;--hov:#c9ad8a;--mut:#8f7b64;--glow:rgba(138,90,43,.14);--bgrgb:248,243,236;--s1rgb:255,253,250}
+html[data-theme=indigo][data-mode=light]{--bg:#eff1fd;--s1:#fafbff;--s2:#e0e4fa;--line:#c6cdf0;--txt:#424a7e;--hd:#0d1130;--si:#232b5e;--st:#3f4bd0;--hov:#a2abe6;--mut:#7a82ae;--glow:rgba(63,75,208,.14);--bgrgb:239,241,253;--s1rgb:250,251,255}
 .sw{position:relative}
 .sw em{position:absolute;top:-6px;left:50%;margin-left:10px;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background:var(--st);color:var(--bg);font:700 .7rem/1 'Plus Jakarta Sans',sans-serif;font-style:normal;z-index:1}
 #ch{display:block;margin-top:12px;font-size:.72rem;color:var(--mut)}
