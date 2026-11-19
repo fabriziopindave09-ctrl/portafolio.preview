@@ -431,3 +431,31 @@ html[data-theme=indigo][data-mode=light]{--bg:#eff1fd;--s1:#fafbff;--s2:#e0e4fa;
 #nlm{flex-basis:100%;font-size:.78rem}
 #nlm:empty{display:none}
 #nlm.ok{color:var(--ok)}#nlm.er{color:#e5736f}
+
+
+/* secciones desplegables (FAQ, portafolio vs CV, comparación de paquetes) */
+.acc{margin:28px 0 16px;border:1px solid var(--line);border-radius:14px;background:var(--s2);transition:border-color .2s}
+.acc[open]{border-color:var(--st)}
+.acc>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;list-style:none;cursor:pointer}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary:after{content:"\f067";flex:none;font-family:"Font Awesome 6 Free";font-weight:900;font-size:.8rem;color:var(--st);transition:transform .25s}
+.acc[open]>summary:after{transform:rotate(45deg)}
+.acc>summary:focus-visible{outline:2px solid var(--st);outline-offset:2px;border-radius:14px}
+#bp .acc>summary h4{margin:0;font-size:1.05rem}
+.acc>.cmp,.acc>.faq{margin:0 14px 14px}
+.acc .faq details{background:var(--bg)}
+
+/* Fibonacci y Pi: se dibujan solos y se desdibujan en loop (SVG en línea creado desde script.js) */
+#fxd{position:absolute;z-index:0;pointer-events:none;color:var(--st);overflow:visible}
+#fxd.fibo{inset:0;width:100%;height:100%;opacity:.55}
+#fxd.pi{top:-15%;right:-240px;height:130%;aspect-ratio:1;opacity:.34}
+.hero.fxd-on::after{display:none!important}
+#fxd.off *{animation-play-state:paused!important}
+@media(prefers-reduced-motion:no-preference){
+  #fxd:not(.still) .dr{stroke-dasharray:1;animation:fxdraw var(--fxt,14s) cubic-bezier(.45,0,.25,1) var(--fxd,0s) infinite backwards}
+  #fxd:not(.still) .dr.sq{animation-name:fxsq}
+  #fxd:not(.still) .dt{animation:fxfade var(--fxt,14s) ease-in-out infinite backwards}
+}
+@keyframes fxdraw{0%{stroke-dashoffset:1}40%,66%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:-1}}
+@keyframes fxsq{0%,6%{stroke-dashoffset:1}22%,70%{stroke-dashoffset:0}92%,100%{stroke-dashoffset:-1}}
+@keyframes fxfade{0%,30%{opacity:0}48%,66%{opacity:1}90%,100%{opacity:0}}

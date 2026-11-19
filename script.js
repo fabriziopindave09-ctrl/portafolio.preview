@@ -107,7 +107,7 @@ const WA_NUM='5492914499050';
 document.getElementById('wa').href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent('Hola! Vi la preview de portafolios virtuales y quiero el mío.');
 function goPlans(){document.getElementById('planes').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})}
 document.getElementById('goplans').onclick=goPlans;
-document.getElementById('gofaq').onclick=()=>document.getElementById('faq').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});
+document.getElementById('gofaq').onclick=()=>{const f=document.getElementById('faq');f.open=true;f.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})};
 document.getElementById('vp').onclick=()=>{openP(false);bp.showModal();setTimeout(goPlans,60)};
 document.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>openForm(b.dataset.plan));
 const XF='https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Serif+Display&family=Nunito:wght@700;800&family=Bebas+Neue&family=Montserrat:wght@600;700&family=Cormorant+Garamond:wght@600;700&family=Orbitron:wght@600;700&family=Fraunces:wght@600;700&family=Josefin+Sans:wght@600;700&family=Abril+Fatface&display=swap';
@@ -197,14 +197,57 @@ function fxSet(b){
     fxFocoSet(FX.x,FX.y);addEventListener('pointermove',fxMove,{passive:true});fxRun();
   }
 }
-if('IntersectionObserver' in window)new IntersectionObserver(es=>{FX.vis=es[0].isIntersecting;fxRun()}).observe(FXH);
+if('IntersectionObserver' in window)new IntersectionObserver(es=>{FX.vis=es[0].isIntersecting;fxRun();if(FXD.el)FXD.el.classList.toggle('off',!FX.vis)}).observe(FXH);
 if('ResizeObserver' in window){let rt;new ResizeObserver(()=>{if(FX.mode!=='codigo')return;clearTimeout(rt);rt=setTimeout(fxSize,150)}).observe(FXH)}
 new MutationObserver(()=>{fxColors();if(FX.mode==='codigo'&&fxStill())fxSize()}).observe(root,{attributes:true,attributeFilter:['data-theme','data-mode']});
 FX.rm.addEventListener('change',()=>fxSet(FX.mode));
+
+// ---- fondos que se dibujan solos (Fibonacci y Pi): toma el SVG del mismo CSS, lo pone en línea y lo anima
+const FXD={cache:{},el:null};
+function fxdSvg(b){
+  if(FXD.cache[b])return FXD.cache[b];
+  try{
+    const cs=getComputedStyle(FXH,'::after'),v=cs.webkitMaskImage||cs.maskImage||'';
+    const m=v.match(/url\("?(data:image\/svg\+xml,[^"]*)"?\)/);if(!m)return null;
+    let s=decodeURIComponent(m[1].slice(m[1].indexOf(',')+1));
+    s=s.replace(/#000/g,'currentColor').replace(/id='p'/,"id='fxp'").replace(/#p'/g,"#fxp'");
+    const d=new DOMParser().parseFromString(s,'image/svg+xml');
+    if(d.querySelector('parsererror'))return null;
+    return FXD.cache[b]=d.documentElement;
+  }catch(e){return null}
+}
+function fxdSet(b){
+  if(FXD.el){FXD.el.remove();FXD.el=null}
+  FXH.classList.remove('fxd-on');
+  if(b!=='fibo'&&b!=='pi')return;
+  const src=fxdSvg(b);if(!src)return;               // si algo falla, queda el fondo estático del CSS
+  const svg=document.importNode(src,true);
+  svg.id='fxd';svg.setAttribute('class',b+(EMB?' still':''));svg.setAttribute('aria-hidden','true');
+  svg.removeAttribute('width');svg.removeAttribute('height');
+  if(b==='fibo'){
+    const ps=svg.querySelectorAll('path');
+    ps.forEach((p,i)=>{p.setAttribute('pathLength','1');p.classList.add('dr');
+      if(i<ps.length-1){p.classList.add('sq');p.style.setProperty('--fxd',(i*.3).toFixed(1)+'s')}});
+    svg.style.setProperty('--fxt','14s');
+  }else{
+    const ns='http://www.w3.org/2000/svg',def=svg.querySelector('#fxp'),txt=svg.querySelector('text');
+    const mk=document.createElementNS(ns,'mask');mk.id='fxm';mk.setAttribute('maskUnits','userSpaceOnUse');
+    ['x','y'].forEach(a=>mk.setAttribute(a,'0'));['width','height'].forEach(a=>mk.setAttribute(a,'1000'));
+    const sp=document.createElementNS(ns,'path');
+    sp.setAttribute('d',def.getAttribute('d'));sp.setAttribute('fill','none');sp.setAttribute('stroke','#fff');
+    sp.setAttribute('stroke-width','40');sp.setAttribute('pathLength','1');sp.setAttribute('class','dr');
+    mk.appendChild(sp);svg.querySelector('defs').appendChild(mk);
+    txt.setAttribute('mask','url(#fxm)');                // los dígitos se revelan siguiendo la espiral
+    svg.querySelector('text:last-of-type').classList.add('dt'); // el símbolo π entra con fade
+    svg.style.setProperty('--fxt','22s');
+  }
+  FXH.insertBefore(svg,FXH.firstChild);FXD.el=svg;FXH.classList.add('fxd-on');
+  svg.classList.toggle('off',!FX.vis);
+}
 const bh=document.getElementById('bh');
 function bg(b){
   root.dataset.bg=b;
-  fxSet(b);
+  fxSet(b);fxdSet(b);
   document.querySelectorAll('.bgb').forEach(x=>x.setAttribute('aria-pressed',x.dataset.b===b));
   hints();
   try{localStorage.setItem('pv-bg',b)}catch(e){}
