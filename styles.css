@@ -459,3 +459,6 @@ html[data-theme=indigo][data-mode=light]{--bg:#eff1fd;--s1:#fafbff;--s2:#e0e4fa;
 @keyframes fxdraw{0%{stroke-dashoffset:1}40%,66%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:-1}}
 @keyframes fxsq{0%,6%{stroke-dashoffset:1}22%,70%{stroke-dashoffset:0}92%,100%{stroke-dashoffset:-1}}
 @keyframes fxfade{0%,30%{opacity:0}48%,66%{opacity:1}90%,100%{opacity:0}}
+
+/* estrellita en los fondos animados (abajo a la derecha, como el + de arriba) */
+.bgb .an{position:absolute;bottom:-6px;right:-4px;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background:var(--st);color:var(--bg);font-size:.5rem;line-height:1}
